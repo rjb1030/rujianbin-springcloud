@@ -1,0 +1,11 @@
+spring:
+  redis:
+    cluster:
+      max-redirects: 10
+      nodes: 192.168.91.228:7000,192.168.91.228:7001,192.168.91.228:7002,192.168.91.228:7003,192.168.91.228:7004,192.168.91.228:7005
+    timeout: 20000
+    pool:
+      max-idle: 20
+      min-idle: 10
+      max-active: 1000
+      max-wait: -1

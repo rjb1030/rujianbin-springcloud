@@ -1,0 +1,16 @@
+server: 
+  port: 7030
+  address: localhost
+  session:
+    timeout: 600
+  contextPath: /rujianbin-eureka-server
+spring: 
+  profiles:
+    active: dev
+
+
+    
+    
+    
+    
+    

@@ -1,0 +1,9 @@
+mybatis:
+  #typeAliasesPackage: com.rujianbin.provider.mybatis.entity,com.rujianbin.provider.security.entity
+  #mapperLocations: classpath:/mapper/*.xml
+  configuration:
+    logImpl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    mapUnderscoreToCamelCase: true
+    defaultStatementTimeout: 25000
+    defaultExecutorType: REUSE
+    useGeneratedKeys: true
