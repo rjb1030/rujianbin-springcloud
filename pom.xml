@@ -17,6 +17,8 @@
       <module>extend-common-utils</module>
       <module>extend-autoconfiguration-datasource</module>
       <module>extend-autoconfiguration-mybatis</module>
+      <module>extend-autoconfiguration-springsecurity</module>
+      <module>rujianbin-security-principal</module>
   </modules>
 
 

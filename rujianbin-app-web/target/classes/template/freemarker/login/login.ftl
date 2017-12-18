@@ -19,9 +19,9 @@
     </script>
 </head>
 <body>
-<form action="" class="login" method="post">
+<form action="login-submit" class="login" method="post">
     <h1>login page</h1>
-    <#--<input type="hidden"                        6-->
+    <#--<input type="hidden" -->
            <#--name="${_csrf.parameterName}"-->
            <#--value="${_csrf.token}"/>-->
     <input type="text" name="username" class="login-input" placeholder="Username" autofocus>

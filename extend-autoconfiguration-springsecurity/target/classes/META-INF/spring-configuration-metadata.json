@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "name": "springsecurity.authorize-match",
+      "type": "rujianbin.autoconfiguration.springsecurity.config.handle.authorizematch.AuthorizeMatchProperties",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.authorizematch.AuthorizeMatchProperties"
+    },
+    {
+      "name": "springsecurity.login-handle",
+      "type": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties"
+    },
+    {
+      "name": "springsecurity.logout-handle",
+      "type": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "springsecurity.authorize-match.authority-url",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.authorizematch.AuthorizeMatchProperties"
+    },
+    {
+      "name": "springsecurity.authorize-match.permit-all-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.authorizematch.AuthorizeMatchProperties"
+    },
+    {
+      "name": "springsecurity.authorize-match.static-resources",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.authorizematch.AuthorizeMatchProperties"
+    },
+    {
+      "name": "springsecurity.login-handle.failure-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties"
+    },
+    {
+      "name": "springsecurity.login-handle.login-page",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties"
+    },
+    {
+      "name": "springsecurity.login-handle.login-processing-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties"
+    },
+    {
+      "name": "springsecurity.login-handle.success-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.login.LoginHandleProperties"
+    },
+    {
+      "name": "springsecurity.logout-handle.invalidate-http-session",
+      "type": "java.lang.Boolean",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties"
+    },
+    {
+      "name": "springsecurity.logout-handle.logout-success-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties"
+    },
+    {
+      "name": "springsecurity.logout-handle.logout-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties"
+    },
+    {
+      "name": "springsecurity.logout-handle.session-cookie-name",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.autoconfiguration.springsecurity.config.handle.logout.LogoutHandleProperties"
+    }
+  ],
+  "hints": []
+}

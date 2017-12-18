@@ -20,14 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    private TestMapper testMapper;
+//    @Autowired
+//    private TestMapper testMapper;
 
     //http://127.0.0.1:7030/rujianbin-app-web/login
     @RequestMapping("")
     public String login(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("sessionId----->"+request.getSession().getId());
-        Person p = testMapper.findPerson(1L);
+//        Person p = testMapper.findPerson(1L);
         return "login/login";
     }
 

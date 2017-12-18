@@ -1,0 +1,19 @@
+springsecurity:
+  authorize-match:
+    static-resources: /images/**,/js/**,/css/**
+    permit-all-url: /common/**,/login/**,/websocket
+    authority-url:
+      /providerFMK/index: p1:f1:read
+      /home: p1:f1:read
+  access-denied-handler:
+    url: /common/403
+  login-handle:
+    login-page: /login
+    login-processing-url: /login-submit
+    failure-url: /login?error=
+    success-url: /home
+  logout-handle:
+    logout-url: /login/logout,GET
+    logout-success-url: /login?logout
+    session-cookie-name: SESSION-COOKIE
+    invalidate-http-session: true

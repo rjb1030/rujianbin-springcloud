@@ -1,6 +1,7 @@
 package rujianbin.auoconfiguration.freemarker.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -38,7 +39,7 @@ public class WebFreeMarkerConfigurer extends FreeMarkerWebConfiguration{
 
 	@Bean
 	@ConditionalOnMissingBean({FreeMarkerConfig.class})
-	public FreeMarkerConfigurer freeMarkerConfigurer(FreeMarkerVariablesProperties freeMarkerVariables) {
+	public FreeMarkerConfigurer freeMarkerConfigurer(@Autowired FreeMarkerVariablesProperties freeMarkerVariables) {
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
 		configurer.setFreemarkerVariables(freeMarkerVariables.getVariables());
 		applyProperties(configurer);

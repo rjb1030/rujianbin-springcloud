@@ -1,4 +1,4 @@
-package rujianbin;
+package rujianbin.autoconfiguration.springsecurity;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
@@ -9,11 +9,11 @@ import rujianbin.common.utils.YamlPropertySourceFactory;
  *
  */
 @SpringBootApplication
-@PropertySource(value="classpath:application-mybatis-config.yml",factory=YamlPropertySourceFactory.class)
-public class MybatisApplication
+@PropertySource(value = "classpath:application-springsecurity-config.yml",factory = YamlPropertySourceFactory.class)
+public class SpringSecurityApplication
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        System.out.println( "Hello spring-security!" );
     }
 }
