@@ -11,6 +11,7 @@ public class RjbLogoutFilter extends LogoutFilter{
 
     public RjbLogoutFilter(String filterProcessesUrl,LogoutSuccessHandler logoutSuccessHandler, LogoutHandler... handlers){
         super(logoutSuccessHandler,handlers);
+        super.setFilterProcessesUrl(filterProcessesUrl);
     }
 
 }

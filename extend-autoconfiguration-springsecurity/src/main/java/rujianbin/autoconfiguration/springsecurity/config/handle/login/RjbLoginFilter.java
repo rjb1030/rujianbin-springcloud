@@ -37,6 +37,7 @@ public class RjbLoginFilter extends UsernamePasswordAuthenticationFilter {
         super.setAuthenticationFailureHandler(failureHandler);
         super.setAuthenticationManager(authenticationManager);
         super.setAuthenticationDetailsSource(authenticationDetailsSource);
+
     }
 
     @Override

@@ -20,20 +20,18 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/login")
 public class LoginController {
 
-//    @Autowired
-//    private TestMapper testMapper;
+
 
     //http://127.0.0.1:7030/rujianbin-app-web/login
     @RequestMapping("")
     public String login(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("sessionId----->"+request.getSession().getId());
-//        Person p = testMapper.findPerson(1L);
         return "login/login";
     }
 
     @RequestMapping(value = "/logout",method = {RequestMethod.POST,RequestMethod.GET})
     public String logout(ModelMap model) {
         System.out.println("成功退出。。。。");
-        return "403";
+        return null;
     }
 }

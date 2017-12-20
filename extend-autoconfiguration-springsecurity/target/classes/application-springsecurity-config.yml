@@ -1,6 +1,6 @@
 springsecurity:
   authorize-match:
-    static-resources: /images/**,/js/**,/css/**
+    static-resources: /images/**,/js/**,/css/**,/assets/**,/components/**,/mustache/**,/favicon.ico
     permit-all-url: /common/**,/login/**,/websocket
     authority-url:
       /providerFMK/index: p1:f1:read
@@ -13,7 +13,7 @@ springsecurity:
     failure-url: /login?error=
     success-url: /home
   logout-handle:
-    logout-url: /login/logout,GET
+    logout-url: /login/logout
     logout-success-url: /login?logout
     session-cookie-name: SESSION-COOKIE
     invalidate-http-session: true

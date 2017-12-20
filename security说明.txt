@@ -1,0 +1,56 @@
+以client类型获取token或登录为例，filter链执行顺序
+    SecurityContextPersistenceFilter   (SECURITY_CONTEXT_FILTER)
+    WebAsyncManagerIntegrationFilter
+    HeaderWriterFilter   (HEADERS_FILTER)
+    CsrfFilter   (常规登录  CSRF_FILTER)
+    LogoutFilter  (常规登录  LOGOUT_FILTER)
+    ClientCredentialsTokenEndpointFilter (或UsernamePasswordAuthenticationFilter     FORM_LOGIN_FILTER)
+    ConcurrentSessionFilter  (校验session是否过期等，决定是否logout)
+    RequestCacheAwareFilter (常规登录)
+    BasicAuthenticationFilter (BASIC_AUTH_FILTER)
+    SecurityContextHolderAwareRequestFilter   (SERVLET_API_SUPPORT_FILTER)
+    AnonymousAuthenticationFilter (常规登录  ANONYMOUS_FILTER)
+    SessionManagementFilter    (常规登录  SESSION_MANAGEMENT_FILTER   )
+    ExceptionTranslationFilter  (EXCEPTION_TRANSLATION_FILTER)
+    FilterSecurityInterceptor   (FILTER_SECURITY_INTERCEPTOR)
+
+    以上过滤器通过后
+    TokenEndpoint 生成token
+
+
+申请授权
+    AuthorizationEndpoint获取code
+    TokenEndpoint 带上code获取token
+
+    CheckTokenEndpoint  令牌校验
+    WhitelabelApprovalEndpoint  授权页面
+
+token验证
+OAuth2AuthenticationProcessingFilter  (访问资源时也会经过该filter验证)
+CheckTokenEndpoint  (验证token的请求地址)
+
+
+
+
+AbstractAuthenticationProcessingFilter
+    作用：对提交上来的用户名密码封装及验证
+    实现类：
+        ClientCredentialsTokenEndpointFilter    oauth2的client_id获取token
+        UsernamePasswordAuthenticationFilter    普通登录 http.form-login标签就是组装该对象
+        OAuth2ClientAuthenticationProcessingFilter
+OAuth2AuthenticationProcessingFilter
+    作用：对提交上来的token做验证封装，带token访问资源时会经过该filter
+
+
+ProviderManager
+    作用：AbstractAuthenticationProcessingFilter封装后调用本类，获取AuthenticationProvider接口相关实现类验证用户
+
+AuthenticationProvider
+    作用：根据封装的用户名密码做用户身份验证
+    抽象类：AbstractUserDetailsAuthenticationProvider
+    实现类：DaoAuthenticationProvider（注入了UserDetailsService和PasswordEncoder用于用户名查询及密码验证）
+
+
+
+
+
