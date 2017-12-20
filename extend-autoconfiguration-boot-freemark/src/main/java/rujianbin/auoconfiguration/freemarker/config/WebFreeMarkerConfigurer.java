@@ -6,13 +6,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration.FreeMarkerWebConfiguration;
+import org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.servlet.Servlet;
+import java.util.Properties;
 
 /**
  * 定义一些freemarker的全局变量
@@ -32,18 +35,31 @@ import javax.servlet.Servlet;
  */
 
 @Configuration
-@ConditionalOnClass({Servlet.class})
-@ConditionalOnWebApplication
-@EnableConfigurationProperties(FreeMarkerVariablesProperties.class)
-public class WebFreeMarkerConfigurer extends FreeMarkerWebConfiguration{
+@EnableConfigurationProperties({FreeMarkerVariablesProperties.class})
+public class WebFreeMarkerConfigurer{
+
+    @Autowired
+    private FreeMarkerProperties properties;
+
+    @Autowired
+    FreeMarkerVariablesProperties freeMarkerVariables;
 
 	@Bean
 	@ConditionalOnMissingBean({FreeMarkerConfig.class})
-	public FreeMarkerConfigurer freeMarkerConfigurer(@Autowired FreeMarkerVariablesProperties freeMarkerVariables) {
+	public FreeMarkerConfigurer freeMarkerConfigurer() {
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
 		configurer.setFreemarkerVariables(freeMarkerVariables.getVariables());
-		applyProperties(configurer);
+
+        configurer.setTemplateLoaderPaths(this.properties.getTemplateLoaderPath());
+        configurer.setPreferFileSystemAccess(this.properties.isPreferFileSystemAccess());
+        configurer.setDefaultEncoding(this.properties.getCharsetName());
+        Properties settings = new Properties();
+        settings.putAll(this.properties.getSettings());
+        configurer.setFreemarkerSettings(settings);
+
 		return configurer;
 	}
+
+
 
 }

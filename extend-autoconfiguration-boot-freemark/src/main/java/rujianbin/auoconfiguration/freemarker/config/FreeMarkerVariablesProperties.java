@@ -18,7 +18,7 @@ import java.util.Map;
  * 故此处直接改用兼容的加载模式@PropertySource默认解析properties文件 可以自定义factory(YamlPropertySourceFactory)使能解析yml文件
  *
  */
-@Component
+
 @ConfigurationProperties(prefix = "spring.freemarker")
 public class FreeMarkerVariablesProperties {
 

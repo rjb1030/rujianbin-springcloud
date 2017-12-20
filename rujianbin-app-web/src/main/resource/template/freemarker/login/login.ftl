@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/login/login.css">
-    <script type="text/javascript" src="js/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery-1.7.2.min.js?${jsVersion}"></script>
     <script type="text/javascript">
         $(function(){
             $('#kaptcha').click(function(){
@@ -24,6 +24,7 @@
     <#--<input type="hidden" -->
            <#--name="${_csrf.parameterName}"-->
            <#--value="${_csrf.token}"/>-->
+
     <input type="text" name="username" class="login-input" placeholder="Username" autofocus>
     <input type="password" name="password" class="login-input" placeholder="Password">
     <div>
