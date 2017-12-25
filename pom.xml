@@ -19,6 +19,9 @@
       <module>extend-autoconfiguration-mybatis</module>
       <module>extend-autoconfiguration-springsecurity</module>
       <module>rujianbin-security-principal</module>
+      <module>extend-autoconfiguration-dubbo</module>
+      <module>microsoftserver-dubbo-impl</module>
+    <module>microsoftserver-dubbo-client</module>
   </modules>
 
 

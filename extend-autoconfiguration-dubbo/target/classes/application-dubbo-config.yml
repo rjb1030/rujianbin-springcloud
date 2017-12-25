@@ -1,0 +1,13 @@
+dubbo:
+  application:
+    name: rujianbin-app-web
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    group: rjb
+    file: /data/rujianbin-app-web/registry.properties
+  protocol:
+    name: rest
+    port: 7777
+    server: tomcat
+    threads: 500
+    accepts: 100

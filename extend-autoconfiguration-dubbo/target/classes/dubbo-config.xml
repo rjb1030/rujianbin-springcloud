@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:util="http://www.springframework.org/schema/util" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:task="http://www.springframework.org/schema/task"
+xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util-3.1.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/task 
+http://www.springframework.org/schema/task/spring-task-3.1.xsd  
+http://code.alibabatech.com/schema/dubbo    
+http://code.alibabatech.com/schema/dubbo/dubbo.xsd">  
+       
+    <dubbo:annotation/>
+    <!-- Application name -->    
+    <dubbo:application name="${dubbo.application.name}" />   
+       
+    <dubbo:registry address="${dubbo.registry.address}" timeout="20000" file="${dubbo.registry.file}" group="${dubbo.registry.group:dubbo}"/>
+    
+    <dubbo:provider accesslog="true"  token="false" timeout="20000" retries="0"/>
+    
+    <dubbo:consumer check="false"/>
+ 
+    <dubbo:protocol name="${dubbo.protocol.name:dubbo}" server="${dubbo.protocol.server:netty}" port="${dubbo.protocol.port}" charset="UTF-8" threadpool="fixed" threads="${dubbo.protocol.threads}" accepts="${dubbo.protocol.accepts}"/>
+    
+    
+</beans>
