@@ -13,7 +13,7 @@ import rujianbin.common.utils.YamlPropertySourceFactory;
  */
 
 @ImportResource({"classpath:dubbo-config.xml"})
-@SpringBootApplication(scanBasePackages={"rujianbin"},exclude={DataSourceAutoConfiguration.class})    //扫描dubbo主键的路径，配置在启动类上@SpringBootApplication属性scanBasePackages上
+@SpringBootApplication(scanBasePackages={"rujianbin"},exclude={DataSourceAutoConfiguration.class})    //扫描dubbo组件的路径，配置在启动类上@SpringBootApplication属性scanBasePackages上
 @PropertySource(value = "classpath:application-dubbo-config.yml",factory = YamlPropertySourceFactory.class)
 public class DubboApplication
 {
