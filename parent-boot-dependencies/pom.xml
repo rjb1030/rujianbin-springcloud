@@ -25,7 +25,8 @@
     <freemark-autoconfiguration.version>0.0.1-SNAPSHOT</freemark-autoconfiguration.version>
     <javax.el-api.version>3.0.0</javax.el-api.version>
     <tomcat-juli.version>8.5.8</tomcat-juli.version>
-    <druid.version>1.0.27</druid.version>
+    <druid.version>1.1.6</druid.version>
+    <druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
     <mybatis.version>3.4.1</mybatis.version>
     <mybatis-spring.version>1.3.0</mybatis-spring.version>
     <pagehelper.version>4.2.1</pagehelper.version>
@@ -58,6 +59,7 @@
     <resteasy.version>3.1.0.Final</resteasy.version>
     <zkclient.version>0.10</zkclient.version>
     <jetty.version>6.1.26</jetty.version>
+    <spring-boot-configuration-processor.version>1.4.4.RELEASE</spring-boot-configuration-processor.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -85,6 +87,11 @@
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid-spring-boot-starter.version}</version>
       </dependency>
       <dependency>
         <groupId>com.alibaba</groupId>
@@ -293,6 +300,11 @@
             <artifactId>slf4j-log4j12</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-configuration-processor</artifactId>
+        <version>${spring-boot-configuration-processor.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

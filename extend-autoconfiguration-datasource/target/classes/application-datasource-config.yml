@@ -1,19 +1,45 @@
+#引入了druid-spring-boot-starter，且DruidDataSourceAutoConfigure的配置before于DataSourceAutoConfiguration生效。故加载DruidDataSource数据源
+#参考链接 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.91.228:3322/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
-    username: root
-    password: 123456
-    initialSize: 10
-    minIdle: 10
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 0
+    druid:
+      one:
+        #驱动配置
+        url: jdbc:mysql://192.168.91.228:3322/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+        #连接池配置
+        initial-size: 10
+        min-idle: 10
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 0
+      two:
+        #驱动配置
+        url: jdbc:mysql://192.168.91.228:3322/oauth2?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+        #连接池配置
+        initial-size: 10
+        min-idle: 10
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 0

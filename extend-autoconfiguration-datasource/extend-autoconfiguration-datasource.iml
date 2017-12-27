@@ -41,6 +41,7 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.6" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.27" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
