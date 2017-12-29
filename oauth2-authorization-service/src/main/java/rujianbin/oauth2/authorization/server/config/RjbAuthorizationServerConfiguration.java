@@ -49,10 +49,6 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
     @Autowired
     private AuthorizationCodeServices authorizationCodeServices;
 
-
-    @Autowired
-    private UserDetailsService clientDetailsUserService;
-
     @Autowired
     private AuthorizationServerTokenServices tokenServices;
 
