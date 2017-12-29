@@ -1,0 +1,8 @@
+oauth2:
+  endpoint:
+    token-url: /oauth2/token
+    authorize-url: /oauth2/authorize
+    confirm-access-url: /oauth2/confirm_access
+    error-url: /oauth2/error
+    check-token-url: /oauth2/check_token
+    token-key-url: /oauth2/token_key

@@ -1,0 +1,40 @@
+{
+  "groups": [{
+    "name": "oauth2.endpoint",
+    "type": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties",
+    "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+  }],
+  "properties": [
+    {
+      "name": "oauth2.endpoint.authorize-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    },
+    {
+      "name": "oauth2.endpoint.check-token-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    },
+    {
+      "name": "oauth2.endpoint.confirm-access-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    },
+    {
+      "name": "oauth2.endpoint.error-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    },
+    {
+      "name": "oauth2.endpoint.token-key-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    },
+    {
+      "name": "oauth2.endpoint.token-url",
+      "type": "java.lang.String",
+      "sourceType": "rujianbin.oauth2.authorization.server.config.EndpointUrlProperties"
+    }
+  ],
+  "hints": []
+}
