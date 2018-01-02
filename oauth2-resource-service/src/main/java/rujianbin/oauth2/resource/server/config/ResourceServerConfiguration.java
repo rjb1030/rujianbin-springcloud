@@ -50,6 +50,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Bean
     public ResourceServerTokenServices resourceServerTokenServices(){
+        /**
+         * 如果不想设置client访问，重写RemoteTokenServices的loadAuthentication header不要放Authorization 则不会被basic filter拦截
+         *
+         */
         RemoteTokenServices resourceServerTokenServices = new RemoteTokenServices();
         resourceServerTokenServices.setCheckTokenEndpointUrl(checkTokenEndpoint);
         resourceServerTokenServices.setClientId(checkTokenUsername);
