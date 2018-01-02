@@ -1,9 +1,9 @@
 server: 
-  port: 7010
+  port: 7011
   address: localhost
   session:
     timeout: 600
-  contextPath: /rujianbin-authorization
+  contextPath: /rujianbin-resources
 spring:
   http:
     encoding.charset: UTF-8

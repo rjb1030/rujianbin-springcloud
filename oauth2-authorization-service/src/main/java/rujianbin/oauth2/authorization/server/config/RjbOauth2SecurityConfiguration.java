@@ -27,7 +27,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableConfigurationProperties(EndpointUrlProperties.class)
-public class RjbOauth2SecurityConfiguration extends WebSecurityConfigurerAdapter implements Ordered {
+public class RjbOauth2SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
     @Autowired
     private EndpointUrlProperties endpointUrlProperties;
@@ -49,10 +49,6 @@ public class RjbOauth2SecurityConfiguration extends WebSecurityConfigurerAdapter
         auth.userDetailsService(clientDetailsUserService);
     }
 
-    @Override
-    public int getOrder() {
-        return 2;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -65,7 +61,8 @@ public class RjbOauth2SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.POST,endpointUrlProperties.getTokenUrl()).authenticated()
                 .antMatchers(endpointUrlProperties.getCheckTokenUrl()).permitAll()
                 .anyRequest().authenticated();
-                http.httpBasic().authenticationEntryPoint(authenticationEntryPoint).and().csrf().disable();
+        http.httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+        http.csrf().disable();
         http.addFilterBefore(clientCredentialsTokenEndpointFilter(), BasicAuthenticationFilter.class);
     }
 

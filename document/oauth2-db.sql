@@ -42,6 +42,8 @@ ROW_FORMAT=DYNAMIC
 ;
 
 INSERT INTO `oauth2`.`oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `create_time`, `archived`, `trusted`, `autoapprove`) VALUES ('client_rjb', 'rujianbin-oauth2-resource', '123456', 'read,write', 'authorization_code,refresh_token,implicit,client_credentials', 'http://127.0.0.1:8080/rujianbin-thirdparty-web/common/index', 'p1:f1:read,p1:f1:edit', NULL, NULL, NULL, '2017-05-15 13:46:05', '0', '0', 'false');
+INSERT INTO `oauth2`.`oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `create_time`, `archived`, `trusted`, `autoapprove`) VALUES ('client_rjb2', 'rujianbin-oauth2-resource', '123456', 'read,write', 'authorization_code,refresh_token,implicit,client_credentials', 'http://127.0.0.1:8080/rujianbin-thirdparty-web/common/index', 'p1:f1:read,p1:f1:edit', NULL, NULL, NULL, '2017-12-29 10:41:49', '0', '0', 'false');
+INSERT INTO `oauth2`.`oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `create_time`, `archived`, `trusted`, `autoapprove`) VALUES ('client_for_checktoken', NULL, '123456', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-12-29 17:49:04', '0', '0', 'false');
 
 
 

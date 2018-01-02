@@ -2,6 +2,7 @@ package rujianbin.oauth2.authorization.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +36,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAuthorizationServer
 @EnableConfigurationProperties(EndpointUrlProperties.class)
-public class RjbAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter implements Ordered {
+public class RjbAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
 
     @Autowired
     private EndpointUrlProperties endpointUrlProperties;
@@ -56,14 +57,8 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
     private UserApprovalHandler oauthUserApprovalHandler;
 
     @Autowired
-//    @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
-
-    @Override
-    public int getOrder() {
-        return 2000;
-    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -85,9 +80,11 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.allowFormAuthenticationForClients();
-//        oauthServer.realm("sparklr2/client");
-//        security.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')");
-//        security.checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
+        /**
+         * 如果资源服务器使用RemoteTokenServices请求到授权服务器做token验证，则此处要放开权限 或指定权限。建议放开权限
+         * 如果指定权限hasAuthority或authenticated()，则需要ClientCredentialsTokenEndpointFilter的URL也要拦截check-token,加载出权限信息
+         */
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("permitAll()");
     }
 
     @Override
@@ -148,6 +145,12 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
     @Configuration
     static class RjbOauth2ServerConfig{
 
+        @Value("${oauth2.token.access-token-validity-seconds}")
+        private Integer accessTokenValiditySeconds;
+
+        @Value("${oauth2.token.refresh-token-validity-seconds}")
+        private Integer refreshTokenValiditySeconds;
+
         @Resource(name="dataSourceTwo")
         private DataSource dataSource;
 
@@ -177,8 +180,8 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
             tokenServices.setTokenStore(tokenStore);
             tokenServices.setClientDetailsService(clientDetailsService);
             tokenServices.setSupportRefreshToken(true);
-            tokenServices.setAccessTokenValiditySeconds(60);
-            tokenServices.setRefreshTokenValiditySeconds(300);
+            tokenServices.setAccessTokenValiditySeconds(accessTokenValiditySeconds);
+            tokenServices.setRefreshTokenValiditySeconds(refreshTokenValiditySeconds);
             return tokenServices;
         }
 
