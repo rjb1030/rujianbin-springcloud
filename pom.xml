@@ -24,6 +24,7 @@
     <module>microsoftserver-dubbo-client</module>
       <module>oauth2-authorization-service</module>
     <module>oauth2-resource-service</module>
+      <module>rujianbin-app-thirdparty-platform</module>
   </modules>
 
 

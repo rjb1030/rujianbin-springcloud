@@ -1,16 +1,27 @@
-以client类型获取token或登录为例，filter链执行顺序
-    SecurityContextPersistenceFilter   (SECURITY_CONTEXT_FILTER)
+常规security登录，filter链执行顺序
     WebAsyncManagerIntegrationFilter
+    SecurityContextPersistenceFilter   (SECURITY_CONTEXT_FILTER)
     HeaderWriterFilter   (HEADERS_FILTER)
-    CsrfFilter   (常规登录  CSRF_FILTER)
-    LogoutFilter  (常规登录  LOGOUT_FILTER)
-    ClientCredentialsTokenEndpointFilter (或UsernamePasswordAuthenticationFilter     FORM_LOGIN_FILTER)
+    CsrfFilter   (CSRF_FILTER  如果开启csrf验证)
+    LogoutFilter  (LOGOUT_FILTER  如果请求URL匹配logout URL则执行逻辑)
+
+    UsernamePasswordAuthenticationFilter (FORM_LOGIN_FILTER 如果匹配登录提交URL则封装提交的用户名密码并交给AuthenticationManager验证，同时标记互踢session)
+    ClientCredentialsTokenEndpointFilter （授权服务器的processingFilter 封装clientId secret做验证）
+    OAuth2AuthenticationProcessingFilter (资源服务器的processingFilter。 oauth2验证tokende 实际交由Oauth2AuthenticationManager（RemoteTokenService）验证token并返回Authentication)
+
+    /**
+        sessionRegistry存储session信息（内存或分布式存储）
+        用于校验session是否过期，过期则执行logoutHandle(SecurityContextLogoutHandler),
+                                logoutHandle逻辑：
+                                session.invalidate()，
+                                SecurityContextHolder.getContext().setAuthentication(null)
+    **/
     ConcurrentSessionFilter  (校验session是否过期等，决定是否logout)
-    RequestCacheAwareFilter (常规登录)
-    BasicAuthenticationFilter (BASIC_AUTH_FILTER)
-    SecurityContextHolderAwareRequestFilter   (SERVLET_API_SUPPORT_FILTER)
-    AnonymousAuthenticationFilter (常规登录  ANONYMOUS_FILTER)
-    SessionManagementFilter    (常规登录  SESSION_MANAGEMENT_FILTER   )
+    RequestCacheAwareFilter (是否用缓存的request替换当前request。用于用户登录成功后，重新恢复因为之前登录异常被打断的请求。ExceptionTranslationFilter涉及requestCache.saveRequest(request, response) )
+    BasicAuthenticationFilter (BASIC_AUTH_FILTER  认证用户名密码从header Authorization属性提取)
+    SecurityContextHolderAwareRequestFilter   (SERVLET_API_SUPPORT_FILTER  包装request 增加rolePrefix值为ROLE_的属性)
+    AnonymousAuthenticationFilter (ANONYMOUS_FILTER  如果SecurityContextHolder.getContext().getAuthentication()==null 创建一个anonymousUser权限为ROLE_ANONYMOUS的用户)
+    SessionManagementFilter    (SESSION_MANAGEMENT_FILTER   如果session==null或(Authentication)session.getAttribute("SPRING_SECURITY_CONTEXT")==null则验证匿名用户是否允许(常规登录返回值类型UsernamePasswordAuthenticationToken))
     ExceptionTranslationFilter  (EXCEPTION_TRANSLATION_FILTER)
     FilterSecurityInterceptor   (FILTER_SECURITY_INTERCEPTOR)
 

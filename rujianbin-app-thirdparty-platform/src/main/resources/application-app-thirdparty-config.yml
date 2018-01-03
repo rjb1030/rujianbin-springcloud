@@ -1,0 +1,22 @@
+server: 
+  port: 7031
+  address: localhost
+  session:
+    timeout: 600
+  contextPath: /rujianbin-app-thirdparty
+oauth2:
+  client:
+    authorize:
+      accessTokenUri: http://127.0.0.1:7010/rujianbin-authorization/oauth2/token
+      authorizeUrl: http://127.0.0.1:7010/rujianbin-authorization/oauth2/authorize
+      clientId: client_rjb
+      clientSecret: 123456
+      scope: read,write
+      redirectUri: http://127.0.0.1:7031/rujianbin-app-thirdparty/oauth2/client/currentOauthUser
+
+
+    
+    
+    
+    
+    
