@@ -1,12 +1,23 @@
 package rujianbin.autoconfiguration.redis.session.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.session.data.redis.RedisFlushMode;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
+import rujianbin.security.principal.author.RjbSecurityUser;
+
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -32,6 +43,8 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1200,redisNamespace="rjb-session",redisFlushMode=RedisFlushMode.ON_SAVE)
 public class SessionConfig {
 
+
+
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
@@ -40,6 +53,26 @@ public class SessionConfig {
         //存储路径
         defaultCookieSerializer.setCookiePath("/");
         return defaultCookieSerializer;
+    }
+
+    @Bean
+    public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
+        /**
+         * 如果只是security session用jackson序列化和反序列化，以下配置可用。如果再集成oauth2 则AuthorizationRequest的反序列化会报AuthorizationRequest is not whitelisted异常
+         * 建议用jdk序列化
+         */
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+//        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        //设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
+//        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        //解决security对象序列化时，会报没有默认构造函数或authentication属性无public方法
+//        mapper.registerModules(SecurityJackson2Modules.getModules(getClass().getClassLoader()));
+//        SecurityJackson2Modules.enableDefaultTyping(mapper);
+//        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(mapper);
+//        return serializer;
+
+        return new JdkSerializationRedisSerializer();
     }
 
 

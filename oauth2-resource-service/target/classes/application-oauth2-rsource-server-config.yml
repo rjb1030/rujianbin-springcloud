@@ -1,3 +1,5 @@
 oauth2:
   resource-id: rujianbin-oauth2-resource
   check-token-endpoint: http://127.0.0.1:7010/rujianbin-authorization/oauth2/check_token
+  check-token-username: client_for_checktoken
+  check-token-secret: 123456

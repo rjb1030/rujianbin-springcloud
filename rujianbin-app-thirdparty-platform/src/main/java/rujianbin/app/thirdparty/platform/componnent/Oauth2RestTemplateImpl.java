@@ -52,6 +52,7 @@ public class Oauth2RestTemplateImpl implements IOAuth2RestTemplate {
     public OAuth2RestTemplate getTemplate(String code){
         AuthorizationCodeResourceDetails resourceDetails = getDetails();
         OAuth2AccessToken token = getToken(code);
+        System.out.println("token = "+token.getValue());
         OAuth2RestTemplate template = new OAuth2RestTemplate(resourceDetails, new DefaultOAuth2ClientContext(token));
         Long currentTimeMillis = System.currentTimeMillis();
         String sign = getSign(currentTimeMillis);

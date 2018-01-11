@@ -37,6 +37,7 @@
                         <div class="text-section">
                             <h1>Dashboard</h1>
                             <p>This is a quick overview of some features</p>
+                            <a target="_blank" href="http://127.0.0.1:7031/rujianbin-app-thirdparty/oauth2/client/authorize">跳转第三方平台</a>
                         </div>
                         <ul class="states">
                             <li class="error">Error : This is an error placed text message.</li>

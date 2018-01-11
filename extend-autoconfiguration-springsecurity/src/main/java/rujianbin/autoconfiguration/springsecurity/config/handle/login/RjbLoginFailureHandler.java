@@ -29,7 +29,12 @@ public class RjbLoginFailureHandler extends SimpleUrlAuthenticationFailureHandle
             this.logger.debug("No failure URL set, sending 401 Unauthorized error");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + exception.getMessage());
         } else {
-            super.saveException(request, exception);
+            /**
+             * //super.saveException(request, exception);
+             * 如果session序列化是jackson,则Exception反序列化时会报is not whitelisted。解决方式是在Exception对象上加上jackson注解如@JsonAutoDetect
+             * 异常不存入session则没有相关问题
+             */
+//            super.saveException(request, exception);
             String toUrl = this.defaultFailureUrl;
             if(exception instanceof UsernameNotFoundException){
                 System.out.println("登录失败：用户名不存在");

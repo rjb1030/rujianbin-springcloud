@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -174,8 +175,14 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
             return new ClientDetailsUserDetailsService(clientDetailsService);
         }
 
+        /**
+         * 实现了AuthorizationServerTokenServices  ResourceServerTokenServices 两个接口。授权端和资源端可以同时用这个tokenService
+         * @param tokenStore
+         * @param clientDetailsService
+         * @return
+         */
         @Bean
-        public AuthorizationServerTokenServices tokenServices(@Qualifier("tokenStore") TokenStore tokenStore, @Qualifier("jdbcClientDetailsService") ClientDetailsService clientDetailsService){
+        public DefaultTokenServices tokenServices(@Qualifier("tokenStore") TokenStore tokenStore, @Qualifier("jdbcClientDetailsService") ClientDetailsService clientDetailsService){
             DefaultTokenServices tokenServices =  new DefaultTokenServices();
             tokenServices.setTokenStore(tokenStore);
             tokenServices.setClientDetailsService(clientDetailsService);
@@ -189,5 +196,6 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
         public UserApprovalHandler oauthUserApprovalHandler(){
             return new DefaultUserApprovalHandler();
         }
+
     }
 }

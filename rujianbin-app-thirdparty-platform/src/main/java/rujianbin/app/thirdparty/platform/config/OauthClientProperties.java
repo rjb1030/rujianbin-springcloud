@@ -15,6 +15,7 @@ public class OauthClientProperties {
     private String clientSecret;
     private String scope;
     private String redirectUri;
+    private String currentUserUrl;
 
     public String getAccessTokenUri() {
         return accessTokenUri;
@@ -62,5 +63,13 @@ public class OauthClientProperties {
 
     public void setRedirectUri(String redirectUri) {
         this.redirectUri = redirectUri;
+    }
+
+    public String getCurrentUserUrl() {
+        return currentUserUrl;
+    }
+
+    public void setCurrentUserUrl(String currentUserUrl) {
+        this.currentUserUrl = currentUserUrl;
     }
 }

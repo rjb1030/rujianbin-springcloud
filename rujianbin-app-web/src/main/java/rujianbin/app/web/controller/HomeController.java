@@ -1,6 +1,7 @@
 package rujianbin.app.web.controller;
 
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import rujianbin.security.principal.author.RjbSecurityUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * Created by 汝建斌 on 2017/4/10.
@@ -21,8 +23,8 @@ public class HomeController {
     public String login(HttpServletRequest request, HttpServletResponse response,ModelMap model) {
         Object obj = request.getSession().getAttribute(RjbSecurityUser.sessionKey);
         if(obj!=null){
-            RjbSecurityUser rjbSecurityUser  = (RjbSecurityUser)obj;
-            model.put("user",rjbSecurityUser.getName()+"("+rjbSecurityUser.getUsername()+")");
+            User rjbSecurityUser  = (User)obj;
+            model.put("user",rjbSecurityUser.getUsername()+"("+rjbSecurityUser.getUsername()+")");
             model.put("authority",rjbSecurityUser.getAuthorities());
         }
 

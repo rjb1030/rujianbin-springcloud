@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import rujianbin.app.thirdparty.platform.componnent.IOAuth2RestTemplate;
 import rujianbin.app.thirdparty.platform.config.OauthClientProperties;
-import rujianbin.security.principal.entity.UserEntity;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +37,7 @@ public class OauthClientController {
     private OauthClientProperties oauthClientProperties;
 
     /**
+     * 127.0.0.1:7031/rujianbin-app-thirdparty/oauth2/client/authorize
      * 请求code
      * 带上session的cookie 请求oauth/authorize。  授权服务器要根据cookie加载登录信息session 然后返回将code后缀到redirectUrl并请求redirectUrl
      * code授权必须是有正常的security登录session，故授权服务也得配置session持久化(同应用服务器)，故而可以通过cookie加载session
@@ -46,6 +46,7 @@ public class OauthClientController {
      * @param model
      * @return
      */
+    @RequestMapping("/authorize")
     public String authorize(HttpServletRequest request, HttpServletResponse response, ModelMap model){
         Cookie[] cookies = request.getCookies();
         if(cookies!=null && cookies.length>0){
@@ -53,12 +54,15 @@ public class OauthClientController {
                 System.out.println("cookie name="+cookie.getName()+",value="+cookie.getValue()+",domain="+cookie.getDomain());
             }
         }
-        model.put("client_id",oauthClientProperties.getClientId());
-        model.put("grant_type","authorization_code");
-        //这个跳转地址要和oauth_client_details的对应client的web_server_direct_uri一致
-        model.put("redirect_uri",oauthClientProperties.getRedirectUri());
-        model.put("response_type","code");
-        return "redirect:"+oauthClientProperties.getAuthorizeUrl();
+        StringBuilder builder = new StringBuilder();
+        builder.append("redirect:").append(oauthClientProperties.getAuthorizeUrl())
+                .append("?client_id=").append(oauthClientProperties.getClientId())
+                .append("&grant_type=").append("authorization_code")
+                //这个跳转地址要和oauth_client_details的对应client的web_server_direct_uri一致
+                .append("&redirect_uri=").append(oauthClientProperties.getRedirectUri())
+                .append("&response_type=").append("code");
+
+        return builder.toString();
     }
 
 
@@ -78,11 +82,11 @@ public class OauthClientController {
             map.put("userinfo","拒绝授权");
         }else{
             OAuth2RestTemplate template = oAuth2RestTemplate.getTemplate(code);
-            List<UserEntity> userList = getForObjectList(template,"",new ParameterizedTypeReference<List<UserEntity>>(){});
-            List<UserEntity> userList2 = getForObjectList(template,"",new ParameterizedTypeReference<List<UserEntity>>(){});
-            map.put("userinfo",new ObjectMapper().writeValueAsString(userList));
+            Map<String,Object> parameters = new HashMap<>();
+            String user= getForObjectList(template,oauthClientProperties.getCurrentUserUrl(),String.class,parameters);
+            map.put("userinfo",new ObjectMapper().writeValueAsString(user));
         }
-        return null;
+        return map;
     }
 
     private  <T> List<T> getForObjectList(OAuth2RestTemplate template,String url, ParameterizedTypeReference<List<T>> typeRef){
@@ -90,6 +94,14 @@ public class OauthClientController {
                 HttpMethod.GET,
                 new HttpEntity<String>(new HttpHeaders()),
                 typeRef);
+        return result.getBody();
+    }
+
+    private  <T> T getForObjectList(OAuth2RestTemplate template,String url, Class<T> claz,Map<String,Object> uriParameters){
+        ResponseEntity<T> result = template.exchange(url,
+                HttpMethod.GET,
+                new HttpEntity<String>(new HttpHeaders()),
+                claz,uriParameters);
         return result.getBody();
     }
 }

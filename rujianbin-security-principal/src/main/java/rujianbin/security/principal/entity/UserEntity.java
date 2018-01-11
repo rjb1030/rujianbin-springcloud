@@ -2,8 +2,12 @@ package rujianbin.security.principal.entity;
 
 
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -73,5 +77,17 @@ public class UserEntity implements Serializable{
 
     public void setAuthorityEntityList(List<AuthorityEntity> authorityEntityList) {
         AuthorityEntityList = authorityEntityList;
+    }
+
+    public Collection<? extends GrantedAuthority> getSecurityAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        List<AuthorityEntity> AuthorityEntityList = this.getAuthorityEntityList();
+        if(AuthorityEntityList != null){
+            for (AuthorityEntity author : AuthorityEntityList) {
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority(author.getAuthorityCode());
+                authorities.add(authority);
+            }
+        }
+        return authorities;
     }
 }

@@ -10,7 +10,7 @@ import rujianbin.common.utils.YamlPropertySourceFactory;
  *
  */
 @SpringBootApplication
-@PropertySource(value = "classpath:application-redis-session-config.yml",factory = YamlPropertySourceFactory.class)    //该注解默认加载properties文件，如果要yml文件 则属性factory = YamlPropertySourceFactory.class
+@PropertySource(value = "classpath:application-redis-single-session-config.yml",factory = YamlPropertySourceFactory.class)    //该注解默认加载properties文件，如果要yml文件 则属性factory = YamlPropertySourceFactory.class
 public class RedisSessionApplication {
     public static void main( String[] args ){
         System.out.println( "Hello World! RedisSessionApplication !!" );

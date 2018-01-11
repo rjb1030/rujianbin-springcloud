@@ -35,6 +35,7 @@
 
     CheckTokenEndpoint  令牌校验
     WhitelabelApprovalEndpoint  授权页面
+    WhitelabelErrorEndpoint 显示授权服务器的错误页
 
 token验证
 OAuth2AuthenticationProcessingFilter  (访问资源时也会经过该filter验证)

@@ -2,6 +2,7 @@ package rujianbin.autoconfiguration.springsecurity.config.handle.login;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,8 @@ import java.util.List;
 @Component("rjbUserDetailsService")
 public class RjbUserDetailsService implements UserDetailsService {
 
+
+
     @Autowired
     private IUserDao userDao;
 
@@ -34,7 +37,10 @@ public class RjbUserDetailsService implements UserDetailsService {
         }
         List<AuthorityEntity> AuthorityEntityList = authorityDao.getAuthorityEntityList(userEntity.getId());
         userEntity.setAuthorityEntityList(AuthorityEntityList);
-        RjbSecurityUser seu = new RjbSecurityUser(userEntity);
-        return  seu;
+        RjbSecurityUser user = new RjbSecurityUser(userEntity);
+//        User user = new User(userEntity.getUsername(),userEntity.getPassword(),userEntity.getSecurityAuthorities());
+        return user;
+//        RjbSecurityUser seu = new RjbSecurityUser(userEntity);
+//        return  seu;
     }
 }
