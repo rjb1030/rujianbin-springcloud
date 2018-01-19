@@ -120,6 +120,7 @@ public class RjbTextWebSocketHandler extends TextWebSocketHandler {
         RjbMessage msg = new RjbMessage();
         msg.setFrom(from);
         msg.setContent(content);
+        msg.setOnlineCount(onlineCount.get());
         return RjbStringUtils.ObjectToString(msg);
     }
 

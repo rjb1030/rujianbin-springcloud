@@ -26,7 +26,7 @@ websocket.onmessage = function (event) {
     console.log(event);
 
     var msg = eval("("+event.data+")");
-    addMessage(msg.from,msg.content)
+    addMessage(msg.from,msg.content,msg.onlineCount);
 
 }
 
@@ -44,7 +44,7 @@ var sendMsg = function(msg){
 }
 
 
-var addMessage = function(from, msg){
+var addMessage = function(from, msg,onlineCount){
     var li = document.createElement('li');
     li.innerHTML = '<span>' + from + '</span>' + ' : ' + msg;
     document.querySelector('#chat_conatiner').appendChild(li);
@@ -54,6 +54,10 @@ var addMessage = function(from, msg){
 
     // 并设置焦点
     document.querySelector('textarea').focus();
+    if(onlineCount){
+        document.querySelector('#ws_online_count').innerHTML=onlineCount;
+    }
+
 
 }
 

@@ -13,6 +13,7 @@
     <input type="hidden" id="ws_token" name="token" value="${token}">
     <input type="hidden" id="ws_nickName" name="nickName" value="${nickName}">
     <input type="hidden" id="ws_userName" name="userName" value="${userName}">
+    <div style="padding: 10px 0px 0px 12px;"><span style="color: green">当前聊天室人数：</span><span id="ws_online_count" style="color: red">0</span></div>
     <div class="content" id="chat">
         <ul id="chat_conatiner">
         </ul>
