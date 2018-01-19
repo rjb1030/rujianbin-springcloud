@@ -25,6 +25,8 @@
       <module>oauth2-authorization-service</module>
     <module>oauth2-resource-service</module>
       <module>rujianbin-app-thirdparty-platform</module>
+      <module>extend-autoconfiguration-mongo</module>
+    <module>rujianbin-app-websocket-chatroom</module>
   </modules>
 
 

@@ -28,7 +28,7 @@
 							</a>
 							<a href="#" class="opener">opener</a>
 						</span>
-                    <a href="/rujianbin-app-web/login/logout" id="logout" class="btn-on">logout</a>
+                    <a href="/${baseContext}/login/logout" id="logout" class="btn-on">logout</a>
                 </div>
             </div>
             <div class="tabs">
@@ -115,7 +115,7 @@
                 </div>
                 <div id="tab-7" class="tab">
                         <div style="width:700px;height:450px;margin:0 auto;">
-                            <iframe src="/rujianbin-app-web/home/chat-room" style="width:700px;height:450px;"></iframe>
+                            <iframe src="/${baseContext}/home/chat-room" style="width:700px;height:450px;"></iframe>
                         </div>
                 </div>
                 <div id="tab-8" class="tab">

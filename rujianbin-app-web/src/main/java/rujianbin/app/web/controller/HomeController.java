@@ -23,8 +23,8 @@ public class HomeController {
     public String login(HttpServletRequest request, HttpServletResponse response,ModelMap model) {
         Object obj = request.getSession().getAttribute(RjbSecurityUser.sessionKey);
         if(obj!=null){
-            User rjbSecurityUser  = (User)obj;
-            model.put("user",rjbSecurityUser.getUsername()+"("+rjbSecurityUser.getUsername()+")");
+            RjbSecurityUser rjbSecurityUser  = (RjbSecurityUser)obj;
+            model.put("user",rjbSecurityUser.getUsername()+"("+rjbSecurityUser.getName()+")");
             model.put("authority",rjbSecurityUser.getAuthorities());
         }
 
@@ -42,7 +42,15 @@ public class HomeController {
 
     @RequestMapping("/chat-room")
     public String chatRoom(HttpServletRequest request, HttpServletResponse response,ModelMap model) {
-        return "websocket/chat-room";
+        Object obj = request.getSession().getAttribute(RjbSecurityUser.sessionKey);
+        if(obj!=null){
+            RjbSecurityUser rjbSecurityUser  = (RjbSecurityUser)obj;
+            model.put("token","xxxxx");
+            model.put("nickName",rjbSecurityUser.getName());
+            model.put("userName",rjbSecurityUser.getUsername());
+            model.put("authority",rjbSecurityUser.getAuthorities());
+        }
+        return "chat/chat-room";
     }
 
 

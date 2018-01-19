@@ -1,0 +1,14 @@
+server: 
+  port: 7032
+  address: localhost
+  session:
+    timeout: 600
+  contextPath: /rujianbin-app-websocket-chatroom
+
+
+
+    
+    
+    
+    
+    
