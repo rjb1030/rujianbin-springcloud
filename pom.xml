@@ -27,6 +27,7 @@
       <module>rujianbin-app-thirdparty-platform</module>
       <module>extend-autoconfiguration-mongo</module>
     <module>rujianbin-app-websocket-chatroom</module>
+      <module>extend-autoconfiguration-tomcat-customizer</module>
   </modules>
 
 

@@ -1,0 +1,26 @@
+tomcat:
+  customizer:
+    server:
+      port: 8899
+      address: localhost
+      context-path: /defaultContext
+      session-timeout: 600
+      tomcat-base-dir: D:/devDirectory/workspace/sp_idea_demo/tomcat/server
+    connect:
+      max-connections: 10
+      max-threads: 15
+      connection-timeout: 30000
+    log:
+      directory: D:/devDirectory/workspace/sp_idea_demo/tomcat/log
+      enabled: true
+      prefix: tomcat-log
+      suffix: .txt
+
+
+
+
+    
+    
+    
+    
+    

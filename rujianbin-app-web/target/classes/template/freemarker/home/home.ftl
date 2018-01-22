@@ -114,8 +114,8 @@
                     </article>
                 </div>
                 <div id="tab-7" class="tab">
-                        <div style="width:700px;height:450px;margin:0 auto;">
-                            <iframe src="/${baseContext}/home/chat-room" style="width:700px;height:450px;"></iframe>
+                        <div style="width:700px;height:500px;margin:0 auto;">
+                            <iframe src="/${baseContext}/home/chat-room" style="width:700px;height:490px;"></iframe>
                         </div>
                 </div>
                 <div id="tab-8" class="tab">
@@ -165,8 +165,8 @@
                 <span class="tooltip"><span>Comments</span></span>
             </li>
             <li>
-                <a href="#tab-7" class="ico7"><span>聊天室</span><em></em></a>
-                <span class="tooltip"><span>聊天室</span></span>
+                <a href="#tab-7" class="ico7"><span>原生websocket聊天室</span><em></em></a>
+                <span class="tooltip"><span>原生websocket聊天室</span></span>
             </li>
             <li>
                 <a href="#tab-8" class="ico8"><span>Settings</span><em></em></a>

@@ -4,10 +4,12 @@
 var websocket = null;
 //判断当前浏览器是否支持WebSocket
 if ('WebSocket' in window) {
+
     var userName = document.querySelector('#ws_userName').value;
     var nickName = document.querySelector('#ws_nickName').value;
     var token = document.querySelector('#ws_token').value;
     websocket = new WebSocket("ws://localhost:7032/rujianbin-app-websocket-chatroom/websocket?token="+token+"&nickName="+nickName+"&userName="+userName);
+
 }
 else {
     alert('当前浏览器 Not support websocket');
