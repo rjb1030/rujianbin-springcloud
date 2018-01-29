@@ -68,6 +68,10 @@ var _sendMsg = function(msg){
 
 var addMessage = function(from, msg,onlineCount){
     var li = document.createElement('li');
+    if(from=="你"){
+        li.style.textAlign="right";
+    }
+
     li.innerHTML = '<span>' + from + '</span>' + ' : ' + msg;
     document.querySelector('#chat_conatiner').appendChild(li);
 

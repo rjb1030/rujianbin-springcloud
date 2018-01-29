@@ -225,8 +225,6 @@ public class RjbNioServer {
                 broadcast(socket,socketClientMap.get(socket).getNickName(),builder.toString());
             }
 
-
-
         } catch (Exception e) {
             logger.error("处理read事件异常",e);
         }

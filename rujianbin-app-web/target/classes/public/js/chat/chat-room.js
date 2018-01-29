@@ -20,7 +20,7 @@ var createSpringSocket = function(){
 var createNioJdkSocket = function () {
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:7090??token="+token+"&nickName="+nickName+"&userName="+userName);
+        websocket = new WebSocket("ws://localhost:7090?token="+token+"&nickName="+nickName+"&userName="+userName);
         bindEvent();
     }
     else {
@@ -67,7 +67,11 @@ var _sendMsg = function(msg){
 
 
 var addMessage = function(from, msg,onlineCount){
-    var li = document.createElement('li');
+    var li = document.createElement('li')
+    if(from=="你"){
+        li.style.textAlign="right";
+    }
+
     li.innerHTML = '<span>' + from + '</span>' + ' : ' + msg;
     document.querySelector('#chat_conatiner').appendChild(li);
 
