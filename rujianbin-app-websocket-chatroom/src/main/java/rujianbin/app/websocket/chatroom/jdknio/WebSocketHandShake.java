@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,4 +80,23 @@ public class WebSocketHandShake {
             return null;
         }
     }
+
+    public static String findUrlParamByRegx(String key,String str){
+        try {
+            Pattern p = Pattern.compile("[?&]"+key+"=([^=&# ]+)");
+            Matcher m = p.matcher(str);
+            if (m.find()){
+                String foundstring = m.group(1);
+                foundstring = URLDecoder.decode(foundstring,"UTF-8");
+                return foundstring;
+            }else{
+                return null;
+            }
+        } catch (UnsupportedEncodingException e) {
+            logger.error("解析URL参数失败",e);
+            return null;
+        }
+    }
+
+
 }

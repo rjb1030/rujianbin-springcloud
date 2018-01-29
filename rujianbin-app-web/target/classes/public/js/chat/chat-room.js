@@ -2,12 +2,12 @@
  * 聊天室
  **/
 var websocket = null;
+var userName = document.querySelector('#ws_userName').value;
+var nickName = document.querySelector('#ws_nickName').value;
+var token = document.querySelector('#ws_token').value;
 var createSpringSocket = function(){
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        var userName = document.querySelector('#ws_userName').value;
-        var nickName = document.querySelector('#ws_nickName').value;
-        var token = document.querySelector('#ws_token').value;
         websocket = new WebSocket("ws://localhost:7032/rujianbin-app-websocket-chatroom/websocket?token="+token+"&nickName="+nickName+"&userName="+userName);
         bindEvent();
     }
@@ -20,7 +20,7 @@ var createSpringSocket = function(){
 var createNioJdkSocket = function () {
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:7090/");
+        websocket = new WebSocket("ws://localhost:7090??token="+token+"&nickName="+nickName+"&userName="+userName);
         bindEvent();
     }
     else {

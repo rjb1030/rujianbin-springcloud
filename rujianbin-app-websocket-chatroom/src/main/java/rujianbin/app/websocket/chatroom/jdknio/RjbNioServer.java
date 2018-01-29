@@ -16,6 +16,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,7 +44,7 @@ public class RjbNioServer {
     private static SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
 
     private AtomicInteger onlineUserCount = new AtomicInteger(0);
-    private List<SocketChannel> socketClientList = new ArrayList<>();
+    private Map<SocketChannel,RjbClientSocket> socketClientMap = new ConcurrentHashMap<>();
 
     private final Logger logger = LoggerFactory.getLogger(RjbNioServer.class);
 
@@ -154,11 +155,12 @@ public class RjbNioServer {
         try {
             // 返回为之创建此键的通道。
             ServerSocketChannel server = (ServerSocketChannel) selectionKey.channel();
+
             // 接受到此通道套接字的连接。
             // 此方法返回的套接字通道（如果有）将处于阻塞模式。
             SocketChannel socket = server.accept();
             int count = onlineUserCount.incrementAndGet();
-            socketClientList.add(socket);
+            socketClientMap.put(socket,new RjbClientSocket(socket,null,null));
             logger.info("有新连接 "+socket.toString()+"   port:"+address.getPort()+" 当前客户端连接数="+count);
             // 配置为非阻塞
             socket.configureBlocking(false);
@@ -198,7 +200,7 @@ public class RjbNioServer {
                 socket.close();
                 selectionKey.cancel();
                 onlineUserCount.decrementAndGet();
-                socketClientList.remove(socket);
+                socketClientMap.remove(socket);
             }
 
             System.out.println("=======================   客户端数据   =========================================");
@@ -211,9 +213,16 @@ public class RjbNioServer {
                 //握手消息：直接响应
                 socket.write(ByteBuffer.wrap(response.getBytes()));
                 selectionKey.attach(null);
+
+                String nickName = WebSocketHandShake.findUrlParamByRegx("nickName",builder.toString());
+                String userName = WebSocketHandShake.findUrlParamByRegx("userName",builder.toString());
+                socketClientMap.get(socket).setNickName(nickName);
+                socketClientMap.get(socket).setUserName(userName);
+                //加入聊天室消息，广播
+                broadcast(socket,"系统",nickName+"加入聊天室");
             }else{
                 //普通消息，广播
-                broadcast(socket,builder.toString());
+                broadcast(socket,socketClientMap.get(socket).getNickName(),builder.toString());
             }
 
 
@@ -242,22 +251,26 @@ public class RjbNioServer {
         }
     }
 
-    public void broadcast(SocketChannel self,String msg) throws IOException{
+    public void broadcast(SocketChannel self,String from,String msg) throws IOException{
         if(StringUtils.isEmpty(msg)){
             return;
         }
-        for(SocketChannel socket : socketClientList){
-            writeMsg(socket,msg);
+        for(Map.Entry<SocketChannel,RjbClientSocket> entry : socketClientMap.entrySet()){
+            SocketChannel socket = entry.getKey();
+            if(self != socket){
+                writeMsg(socket,from,msg);
+            }
+
         }
     }
 
 
-    public void writeMsg(SocketChannel socket,String msg)throws IOException{
+    public void writeMsg(SocketChannel socket,String from,String msg)throws IOException{
         if(StringUtils.isEmpty(msg)){
             return;
         }
         RjbMessage obj = new RjbMessage();
-        obj.setFrom("系统");
+        obj.setFrom(from);
         obj.setContent(msg);
         obj.setOnlineCount(onlineUserCount.get());
         String message = RjbStringUtils.ObjectToString(obj);
