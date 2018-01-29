@@ -2,46 +2,66 @@
  * 聊天室
  **/
 var websocket = null;
-//判断当前浏览器是否支持WebSocket
-if ('WebSocket' in window) {
-
-    var userName = document.querySelector('#ws_userName').value;
-    var nickName = document.querySelector('#ws_nickName').value;
-    var token = document.querySelector('#ws_token').value;
-    websocket = new WebSocket("ws://localhost:7032/rujianbin-app-websocket-chatroom/websocket?token="+token+"&nickName="+nickName+"&userName="+userName);
-
-}
-else {
-    alert('当前浏览器 Not support websocket');
-}
-
-websocket.onerror = function () {
-    console.log("WebSocket连接发生错误");
-};
-
-websocket.onopen = function () {
-    console.log("WebSocket连接成功");
-    addMessage("系统","您成功聊天室")
+var createSpringSocket = function(){
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        var userName = document.querySelector('#ws_userName').value;
+        var nickName = document.querySelector('#ws_nickName').value;
+        var token = document.querySelector('#ws_token').value;
+        websocket = new WebSocket("ws://localhost:7032/rujianbin-app-websocket-chatroom/websocket?token="+token+"&nickName="+nickName+"&userName="+userName);
+        bindEvent();
+    }
+    else {
+        alert('当前浏览器 Not support websocket');
+    }
 }
 
-websocket.onmessage = function (event) {
-    console.log(event);
 
-    var msg = eval("("+event.data+")");
-    addMessage(msg.from,msg.content,msg.onlineCount);
-
+var createNioJdkSocket = function () {
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:7090/");
+        bindEvent();
+    }
+    else {
+        alert('当前浏览器 Not support websocket');
+    }
 }
 
-websocket.onclose = function () {
-    console.log("WebSocket连接关闭");
+var bindEvent = function () {
+    websocket.onerror = function () {
+        console.log("WebSocket连接发生错误");
+    };
+
+    websocket.onopen = function () {
+        console.log("WebSocket连接成功");
+        addMessage("系统","您成功聊天室")
+    }
+
+    websocket.onmessage = function (event) {
+        console.log(event);
+
+        var msg = eval("("+event.data+")");
+        addMessage(msg.from,msg.content,msg.onlineCount);
+
+    }
+
+    websocket.onclose = function () {
+        console.log("WebSocket连接关闭");
+    }
 }
+
+
+
 window.onbeforeunload = function () {
-    websocket.close();
+    if(websocket){
+        websocket.close();
+    }
 }
 
 
 //发送聊天消息
-var sendMsg = function(msg){
+var _sendMsg = function(msg){
     websocket.send(msg);
 }
 
@@ -64,12 +84,15 @@ var addMessage = function(from, msg,onlineCount){
 }
 
 var send = function(){
-
+    if(!websocket){
+        alert("websocket未创建");
+        return;
+    }
     var ele_msg = document.querySelector('textarea');
     var msg = ele_msg.value.replace('\r\n', '').trim();
     console.log(msg);
     if(!msg) return;
-    sendMsg(msg);
+    _sendMsg(msg);
     // 添加消息到自己的内容区
     addMessage('你', msg);
     ele_msg.value = '';
@@ -86,4 +109,12 @@ document.querySelector('#send').addEventListener('click', function(){
 
 document.querySelector('#clear').addEventListener('click', function(){
     document.querySelector('#chat_conatiner').innerHTML = '';
+});
+
+document.querySelector('#springwebsocket').addEventListener('click', function(){
+    createSpringSocket();
+});
+
+document.querySelector('#niojdk').addEventListener('click', function(){
+    createNioJdkSocket();
 });

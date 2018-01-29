@@ -1,4 +1,4 @@
-package rujianbin.app.websocket.chatroom.config;
+package rujianbin.app.websocket.chatroom.springwebsocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

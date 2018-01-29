@@ -21,6 +21,8 @@
     </div>
     <div class="action">
         <textarea ></textarea>
+        <button class="btn btn-success" id="springwebsocket">springwebsocket连接</button>
+        <button class="btn btn-success" id="niojdk">niojdk连接</button>
         <button class="btn btn-success" id="clear">清屏</button>
         <button class="btn btn-success" id="send">发送</button>
     </div>

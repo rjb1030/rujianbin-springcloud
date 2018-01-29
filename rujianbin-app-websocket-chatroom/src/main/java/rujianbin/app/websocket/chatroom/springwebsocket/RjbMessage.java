@@ -1,4 +1,4 @@
-package rujianbin.app.websocket.chatroom.config;
+package rujianbin.app.websocket.chatroom.springwebsocket;
 
 import java.io.Serializable;
 

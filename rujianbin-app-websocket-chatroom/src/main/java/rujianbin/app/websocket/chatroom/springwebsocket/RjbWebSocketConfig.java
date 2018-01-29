@@ -1,4 +1,4 @@
-package rujianbin.app.websocket.chatroom.config;
+package rujianbin.app.websocket.chatroom.springwebsocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,8 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
  * Created by rujianbin on 2018/1/18.
+ * 基于spring web 访问socket端点
+ * ws://{domain}:{port}/{context}/{endpoint}
  */
 
 @EnableWebSocket

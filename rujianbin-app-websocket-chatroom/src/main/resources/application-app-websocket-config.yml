@@ -5,6 +5,12 @@ server:
     timeout: 600
   contextPath: /rujianbin-app-websocket-chatroom
 
+nio:
+  jdk:
+    socket-port: 7090
+    socket-num: 5
+
+
 
 
     
