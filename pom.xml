@@ -28,6 +28,7 @@
       <module>extend-autoconfiguration-mongo</module>
     <module>rujianbin-app-websocket-chatroom</module>
       <module>extend-autoconfiguration-tomcat-customizer</module>
+      <module>extend-autoconfiguration-QLExpress</module>
   </modules>
 
 

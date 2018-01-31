@@ -49,17 +49,9 @@
                     </article>
                 </div>
                 <div id="tab-2" class="tab">
-                    <article>
-                        <div class="text-section">
-                            <h1>Dashboard</h1>
-                            <p>This is a quick overview of some features</p>
-                        </div>
-                        <ul class="states">
-                            <li class="error">Error : This is an error placed text message.</li>
-                            <li class="warning">Warning: This is a warning placed text message.</li>
-                            <li class="succes">Succes : This is a succes placed text message.</li>
-                        </ul>
-                    </article>
+                    <div style="width:90%;height:90%;margin:0 auto;">
+                        <iframe src="/${baseContext}/home/rule-engine" style="width:100%;height:490px;"></iframe>
+                    </div>
                 </div>
                 <div id="tab-3" class="tab">
                     <article>
@@ -142,8 +134,8 @@
                 <span class="tooltip"><span>Dashboard</span></span>
             </li>
             <li>
-                <a href="#tab-2" class="ico2"><span>Gallery</span><em></em></a>
-                <span class="tooltip"><span>Gallery</span></span>
+                <a href="#tab-2" class="ico2"><span>规则引擎</span><em></em></a>
+                <span class="tooltip"><span>规则引擎</span></span>
             </li>
             <li>
                 <a href="#tab-3" class="ico3"><span>Pages</span><em></em></a>

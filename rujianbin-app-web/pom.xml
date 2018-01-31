@@ -38,6 +38,11 @@
         </dependency>
         <dependency>
             <groupId>rujianbin</groupId>
+            <artifactId>extend-autoconfiguration-QLExpress</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>rujianbin</groupId>
             <artifactId>extend-autoconfiguration-springsecurity</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

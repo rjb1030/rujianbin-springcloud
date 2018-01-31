@@ -67,7 +67,7 @@ var _sendMsg = function(msg){
 
 
 var addMessage = function(from, msg,onlineCount){
-    var li = document.createElement('li')
+    var li = document.createElement('li');
     if(from=="你"){
         li.style.textAlign="right";
     }

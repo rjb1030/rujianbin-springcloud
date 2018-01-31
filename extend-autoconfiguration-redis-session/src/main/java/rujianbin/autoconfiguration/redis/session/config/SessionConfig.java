@@ -40,7 +40,7 @@ import java.text.SimpleDateFormat;
  *
  */
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1200,redisNamespace="rjb-session",redisFlushMode=RedisFlushMode.ON_SAVE)
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 3600,redisNamespace="rjb-session",redisFlushMode=RedisFlushMode.ON_SAVE)
 public class SessionConfig {
 
 

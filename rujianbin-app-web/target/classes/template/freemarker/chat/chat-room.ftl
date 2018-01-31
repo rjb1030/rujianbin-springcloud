@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>socket.io 聊天室例子</title>
+    <title>websocket聊天室例子</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="/${baseContext}/css/chat-room/reset.css"/>
