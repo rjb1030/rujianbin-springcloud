@@ -1,0 +1,18 @@
+server: 
+  port: 7040
+eureka:
+  instance:
+    appname: rujianbin-eureka-server
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+#    service-url: http://${eureka.instance.hostname}:${server.port}
+
+
+
+    
+    
+    
+    
+    

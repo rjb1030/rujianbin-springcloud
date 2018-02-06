@@ -1,0 +1,20 @@
+server: 
+  port: 7040
+eureka:
+  instance:
+    appname: sid1-rujianbin-eureka-server
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:7040/eureka/
+
+
+
+    
+    
+    
+    
+    

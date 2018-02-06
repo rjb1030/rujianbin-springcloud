@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.PropertySource;
+import rujianbin.common.utils.YamlPropertySourceFactory;
 
 import javax.security.auth.message.config.AuthConfigFactory;
 
@@ -14,6 +16,7 @@ import javax.security.auth.message.config.AuthConfigFactory;
  */
 @EnableEurekaServer
 @SpringBootApplication
+@PropertySource(value="classpath:application-eureka-server-config.yml",factory=YamlPropertySourceFactory.class)
 public class EurekaServerApp {
     public static void main( String[] args ) {
         //解决tomcat 版本太高，org.apache.catalina.authenticator.AuthenticatorBase.getJaspicProvider报错问题

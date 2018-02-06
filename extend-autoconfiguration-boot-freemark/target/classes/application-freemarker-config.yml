@@ -2,7 +2,7 @@ spring:
   freemarker:
     variables:
       static: http://127.0.0.1/static/
-      jsVersion: 1.0.0
+      jsVersion: ${random.uuid}
       baseContext: rujianbin-app-web
     cache: false
     charset: UTF-8

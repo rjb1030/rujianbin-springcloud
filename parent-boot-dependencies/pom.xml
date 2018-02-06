@@ -60,10 +60,11 @@
     <zkclient.version>0.10</zkclient.version>
     <jetty.version>6.1.26</jetty.version>
     <spring-boot-configuration-processor.version>1.4.4.RELEASE</spring-boot-configuration-processor.version>
-    <httpclient.version>4.2.3</httpclient.version>
-    <httpcore.version>4.3.2</httpcore.version>
+    <httpclient.version>4.5.4</httpclient.version>
+    <httpcore.version>4.4.8</httpcore.version>
     <spring-boot-starter-redis.version>1.4.7.RELEASE</spring-boot-starter-redis.version>
     <QLExpress.version>3.2.0</QLExpress.version>
+    <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -329,6 +330,12 @@
         <groupId>com.alibaba</groupId>
         <artifactId>QLExpress</artifactId>
         <version>${QLExpress.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-junit</artifactId>
+        <version>${hamcrest-junit.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>

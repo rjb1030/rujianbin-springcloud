@@ -1,0 +1,23 @@
+endpoints:
+  shutdown:
+    enabled: true
+  beans:
+    enabled: true
+  health:
+    enabled: true
+  autoconfig:
+    enabled: true
+  configprops:
+    enabled: true
+  env:
+    enabled: true
+  mappings:
+    enabled: true
+  info:
+    enabled: true
+  metrics:
+    enabled: true
+  dump:
+    enabled: true
+  trace:
+    enabled: true

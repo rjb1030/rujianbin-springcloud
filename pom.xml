@@ -29,6 +29,9 @@
     <module>rujianbin-app-websocket-chatroom</module>
       <module>extend-autoconfiguration-tomcat-customizer</module>
       <module>extend-autoconfiguration-QLExpress</module>
+      <module>extend-autoconfiguration-actuator</module>
+      <module>rujianbin-eureka-consumer</module>
+    <module>rujianbin-eureka-provider</module>
   </modules>
 
 
