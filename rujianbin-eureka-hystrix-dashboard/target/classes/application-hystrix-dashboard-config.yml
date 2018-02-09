@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: rujianbin-hystrix-dashboard
+server:
+  port: 7050

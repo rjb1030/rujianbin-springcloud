@@ -1,0 +1,35 @@
+hystrix:
+  threadpool:
+    default:
+      coreSize: 12   #默认10 线程池策略下的最大并发数，超过max直接进入fallback
+      maximumSize: 12  #默认10
+      maxQueueSize: -1   # -1表示SynchronousQueue即同步实时提交队列
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD   #隔离策略 THREAD SEMAPHORE.
+          thread:
+            timeoutInMilliseconds: 3000
+            maxConcurrentRequests: 20
+          semaphore:
+            maxConcurrentRequests: 20  #信号量隔离策略的最大并发数，不适用线程池模式（线程池策略默认最大并发10）. 超过max时，请求直接被拒绝，进入fallback
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 20  #fallback最大的执行并发数，超出抛异常
+        enabled: true    #服务降级开关，请求失败或超时调用fallback，否则抛异常
+      circuitBreaker:
+        enabled: true     #断路器总开关，请求失败时是否启用断路器跟踪其健康指标和熔断请求
+        requestVolumeThreshold: 15    #断路器阈值，滚动时间（默认10秒）内超过max请求数时，断路器开启.
+        sleepWindowInMilliseconds: 5000   #断路器开启后，休眠的窗口期时间。点到后，断路器半开，此时如果请求又失败则继续开启，成功则关闭断路器
+        errorThresholdPercentage: 50   #滚动时间内（默认10秒），在超过请求阈值的前提下，如果请求失败数大于百分比，则开启断路器
+        forceOpen: false
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000   #断路器的滚动时间
+    hello:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1500   #超时设置，优先于实例上的注解配置和全局配置

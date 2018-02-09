@@ -8,26 +8,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>rujianbin</groupId>
-    <artifactId>rujianbin-eureka-provider</artifactId>
+    <artifactId>rujianbin-eureka-hystrix-dashboard</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 
-
     <dependencies>
         <dependency>
-            <groupId>rujianbin</groupId>
-            <artifactId>extend-common-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>rujianbin</groupId>
-            <artifactId>rujianbin-erueka-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+        <!-- 应用指标监控模块 -->
+        <dependency>
+            <groupId>rujianbin</groupId>
+            <artifactId>extend-autoconfiguration-actuator</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -5,11 +5,14 @@ eureka:
     appname: sid1-rujianbin-eureka-server
     hostname: localhost
     prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 20
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://localhost:7040/eureka/
+  server:
+    enable-self-preservation: true
 
 
 

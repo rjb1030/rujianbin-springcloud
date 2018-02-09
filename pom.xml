@@ -32,6 +32,8 @@
       <module>extend-autoconfiguration-actuator</module>
       <module>rujianbin-eureka-consumer</module>
     <module>rujianbin-eureka-provider</module>
+      <module>rujianbin-erueka-api</module>
+      <module>rujianbin-eureka-hystrix-dashboard</module>
   </modules>
 
 
