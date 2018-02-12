@@ -13,7 +13,7 @@ import javax.security.auth.message.config.AuthConfigFactory;
 /**
  * Hello world!
  * 监控地址http://127.0.0.1:7050/hystrix
- * 监控单个实例： http://127.0.0.1:7046/hystrix.stream
+ * 监控单个实例： http://127.0.0.1:7046/hystrix.stream  （eureka-consumer）
  */
 @EnableHystrixDashboard
 @SpringBootApplication

@@ -34,6 +34,8 @@
     <module>rujianbin-eureka-provider</module>
       <module>rujianbin-erueka-api</module>
       <module>rujianbin-eureka-hystrix-dashboard</module>
+      <module>rujianbin-eureka-hystrix-turbine-dashboard</module>
+      <module>rujianbin-eureka-zuul-apigateway</module>
   </modules>
 
 

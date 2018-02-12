@@ -34,7 +34,7 @@ public class HelloController implements IHelloService {
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("/hello host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
         int sleepTime = new Random().nextInt(3000);
-        logger.info("睡眠"+sleepTime);
+        logger.info("hello睡眠"+sleepTime);
         try {
             Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
@@ -46,17 +46,42 @@ public class HelloController implements IHelloService {
     @Override
     public String say(@RequestParam String name,@RequestParam int age){
         ServiceInstance instance = client.getLocalServiceInstance();
-        logger.info("/hello host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
+        logger.info("/say host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("say睡眠"+sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "hello "+name+"("+age+")! i am provider";
     }
 
     @Override
     public String talk(@RequestBody RjbParam param){
+        ServiceInstance instance = client.getLocalServiceInstance();
+        logger.info("/talk host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("talk睡眠"+sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "hello,"+param.getSearchName()+","+param.getSearchPageNo()+","+ ArrayUtils.toString(param.getProductId().toArray());
     }
 
     @Override
     public UserDto sing(@RequestBody RjbParam param){
+        ServiceInstance instance = client.getLocalServiceInstance();
+        logger.info("/sing host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("sing睡眠"+sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         UserDto dto = new UserDto();
         dto.setName(param.getSearchName());
         dto.setAge(param.getSearchPageNo());

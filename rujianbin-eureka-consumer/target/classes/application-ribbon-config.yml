@@ -1,0 +1,15 @@
+ribbon:
+  eureka:
+    enabled: true   #以eureka注册中心的服务作为轮询实例，如果关闭，则自定义轮询服务实例 <client>.ribbon.listOfService=localhsot:xx/xx,localhsot:xx/xx,
+rujianbin-eureka-provider:
+  ribbon:
+    ConnectTimeout: 500  #ribbon超时和hystrix超时是不同概念。hystrix超时要大于ribbon超时，否则直接被熔断而不会ribbon超时重试
+    ReadTimeout: 600
+    OkToRetryOnAllOperations: false   #所有请求类型都重试，慎用。 update操作重试可能引起幂等性问题
+    MaxAutoRetriesNextServer: 1     #请求重试允许更换的实例
+    MaxAutoRetries: 1   #同一实例请求重试次数，失败会换一个实例重试。能换几个重试实例，由MaxAutoRetriesNextServer控制。故实际重试次数=MaxAutoRetriesNextServer * MaxAutoRetries
+spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true

@@ -9,7 +9,7 @@ import rujianbin.eureka.api.service.IHelloService;
  * 利用@FeignClient 以接口形式封装服务提供者的restFul调用
  */
 
-@FeignClient("rujianbin-eureka-provider")
+@FeignClient(value = "rujianbin-eureka-provider",fallback = ConsumerHelloFallback.class)
 public interface IConsumerHelloService extends IHelloService {
 
 

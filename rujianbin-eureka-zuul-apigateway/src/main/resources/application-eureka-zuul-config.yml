@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: rujianbin-eureka-zuul-apigatway
+server:
+  port: 7055
+
+
+zuul:
+  routes:
+    myprovider:
+      path: /api-provider-temp/**
+      url:  http://localhost:7042/     #传统方式的路由  http://127.0.0.1:7055/api-provider-temp/hello
+    myprovider-eureka:
+      path: /api-provider/**       #服务名访问 http://127.0.0.1:7055/api-provider/hello
+      serviceId: rujianbin-eureka-provider   #基于eureka注册中心，通过服务名访问（此时必须配置eureka注册中心）
+    myconsumer-erueka:
+      path: /api-consumer/**
+      serviceId: rujianbin-eureka-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7040/eureka/
+
+hystrix:   #通过serviceId访问时受hystrix控制 默认1秒熔断，故provider和consumer会随机访问成功
+  command:
+      default:
+        execution:
+          isolation:
+            strategy: THREAD   #隔离策略 THREAD SEMAPHORE.
+            thread:
+              timeoutInMilliseconds: 2000
+
+
+
