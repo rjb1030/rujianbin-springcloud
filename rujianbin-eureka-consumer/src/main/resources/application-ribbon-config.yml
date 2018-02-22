@@ -12,4 +12,4 @@ spring:
   cloud:
     loadbalancer:
       retry:
-        enabled: true   #ribbon服务重试开关
+        enabled: false   #ribbon服务重试开关

@@ -1,0 +1,29 @@
+erueka注册中心
+http://127.0.0.1:7040
+
+大前提 consumer连接注册中心，有服务的实例列表，故可以通过serviceId服务名访问
+#通过template指定serviceId直接访问provider，ribbon以注解方式配置在restTemplate上，不支持hystrix熔断
+http://127.0.0.1:7046/hello-consumer
+
+#通过feign接口并且以eureka注册中心serviceId访问provider，自带ribbon和hystrix
+http://127.0.0.1:7046/hello-consumer2
+
+
+#api zuul访问
+http://127.0.0.1:7055/api-provider-temp/hello
+http://127.0.0.1:7055/api-consumer/hello-consumer
+http://127.0.0.1:7055/api-consumer/hello-consumer2  因hystrix配置可能会熔断，多试几次
+http://127.0.0.1:7055/api-provider/hello
+
+
+#provider服务(在注册中心上)
+http://rujianbin-eureka-provider/hello
+http://rujianbin-eureka-provider/say
+http://rujianbin-eureka-provider/talk
+http://rujianbin-eureka-provider/sing
+
+#provider(直接http访问 7041-7045)
+http://localhost:7042/hello
+http://localhost:7042/say?name=rjb&age=33
+http://localhost:7042/talk   参数带对象，使用post请求
+http://localhost:7042/sing   参数带对象，使用post请求

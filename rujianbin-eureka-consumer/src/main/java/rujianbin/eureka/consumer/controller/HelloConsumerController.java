@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import rujianbin.common.utils.RjbStringUtils;
 import rujianbin.eureka.api.bean.RjbParam;
 import rujianbin.eureka.api.bean.UserDto;
 import rujianbin.eureka.consumer.service.IConsumerHelloService;
@@ -34,8 +35,10 @@ public class HelloConsumerController {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Long s1 = System.currentTimeMillis();
                     String ss = tempHelloService.hello();
-                    System.out.println(ss);
+                    Long s2 = System.currentTimeMillis();
+                    System.out.println(ss+"，耗时="+(s2-s1));
                 }
             }).start();
         }
@@ -44,6 +47,7 @@ public class HelloConsumerController {
 
     @RequestMapping("/hello-consumer2")
     public Map hello2(){
+        Long s1 = System.currentTimeMillis();
         String hello = helloService.hello();
         String say = helloService.say("张三",12);
         RjbParam param = new RjbParam();
@@ -59,6 +63,9 @@ public class HelloConsumerController {
         map.put("say",say);
         map.put("talk",talk);
         map.put("sing",sing);
+        Long s2 = System.currentTimeMillis();
+        map.put("耗时",s2-s1);
+        System.out.println(RjbStringUtils.ObjectToString(map));
         return map;
     }
 }

@@ -1,0 +1,12 @@
+7010         oauth2-authorization-service
+7011         oauth2-resource-service
+7030         rujianbin-app-web
+7031         rujianbin-app-thirdparty-platform
+7032         rujianbin-app-websocket-chatroom
+
+7040         rujianbin-eureka-server
+7041-7045    rujianbin-eureka-provider
+7046-7049    rujianbin-eureka-consumer
+7050         rujianbin-eureka-hystrix-dashboard
+7051-7052    rujianbin-eureka-hystrix-turbine
+7055         rujianbin-eureka-zuul-apigateway

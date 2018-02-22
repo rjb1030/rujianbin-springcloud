@@ -9,13 +9,16 @@ zuul:
   routes:
     myprovider:
       path: /api-provider-temp/**
-      url:  http://localhost:7042/     #传统方式的路由  http://127.0.0.1:7055/api-provider-temp/hello
+      url:  http://localhost:7042/     #传统方式的路由  http://127.0.0.1:7055/api-provider-temp/hello，如果有多个服务则参考ribbon的手动维护轮询实例方式。配置ribbon.eureka.enabled=false并以serviceId方式访问，同时维护<serviceId>.ribbon.listOfService=localhsot:xx/xx,localhsot:xx/xx
     myprovider-eureka:
       path: /api-provider/**       #服务名访问 http://127.0.0.1:7055/api-provider/hello
-      serviceId: rujianbin-eureka-provider   #基于eureka注册中心，通过服务名访问（此时必须配置eureka注册中心）
+      serviceId: rujianbin-eureka-provider   #基于eureka注册中心，通过服务名访问（此时必须配置eureka注册中心，如果禁用了注册中心ribbon.eureka.enabled=false，则需要手动维护轮询实例<serviceId>.ribbon.listOfService=localhsot:xx/xx,localhsot:xx/xx）
+      customSensitiveHeaders: true     #对指定路由开启自定义敏感头。因为默认敏感头包括Cookie,Set-Cookie,Authorization属性会被zuul妆发时过滤掉。，此设置可以防止过滤
+      retryabled: false      #不允许重试  zuul.retryable=false全局关闭重试
     myconsumer-erueka:
       path: /api-consumer/**
       serviceId: rujianbin-eureka-consumer
+#  ignored-services: *   #默认情况zuul会根据eureka上的每个服务创建一个默认路由，serviceId就是eureka上的服务名，path也是以eureka上的服务名作为前缀。该配置zuul.ignored-services禁止自动创建路由，而改由配置文件手动创建
 eureka:
   client:
     service-url:
@@ -28,7 +31,10 @@ hystrix:   #通过serviceId访问时受hystrix控制 默认1秒熔断，故provi
           isolation:
             strategy: THREAD   #隔离策略 THREAD SEMAPHORE.
             thread:
-              timeoutInMilliseconds: 2000
+              timeoutInMilliseconds: 10000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 9000
 
 
 

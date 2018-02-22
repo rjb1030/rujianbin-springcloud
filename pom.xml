@@ -36,6 +36,7 @@
       <module>rujianbin-eureka-hystrix-dashboard</module>
       <module>rujianbin-eureka-hystrix-turbine-dashboard</module>
       <module>rujianbin-eureka-zuul-apigateway</module>
+      <module>rujianbin-eureka-configcenter-server</module>
   </modules>
 
 
