@@ -27,3 +27,6 @@ http://localhost:7042/hello
 http://localhost:7042/say?name=rjb&age=33
 http://localhost:7042/talk   参数带对象，使用post请求
 http://localhost:7042/sing   参数带对象，使用post请求
+
+#配置中心，访问配置
+http://127.0.0.1:7056/master/rujianbin-eureka-provider-dev.yml

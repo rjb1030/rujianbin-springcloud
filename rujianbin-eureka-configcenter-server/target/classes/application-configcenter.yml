@@ -1,0 +1,13 @@
+server:
+  port: 7056
+spring:
+  application:
+    name: rujianbin-eureka-configcenter-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/rujianbin/spring-cloud-configcenter-file/
+          search-paths: config
+          username: 769524791@qq.com
+          password: 881030ru

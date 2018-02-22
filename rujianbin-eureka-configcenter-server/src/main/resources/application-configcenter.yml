@@ -1,0 +1,20 @@
+server:
+  port: 7056
+spring:
+  application:
+    name: rujianbin-eureka-configcenter-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/rujianbin/spring-cloud-configcenter-file/    #路径到工程名
+          search-paths: config                           #git工程下的搜索路径，多个以逗号分隔
+          username: 769524791@qq.com                     #git账号
+          password: 881030ru                             #git密码
+
+# 配置中心访问路径 http://127.0.0.1:7056/master/rujianbin-eureka-provider-dev.yml
+#/{aplication}-{profile}.yml
+#/{aplication}/{profile}[/{branch}]
+#/{branch}/{application}-{profile}.yml
+#/{application}-{profile}.properties
+#/{branch}/{application}-{profile}.properties

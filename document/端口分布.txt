@@ -10,3 +10,4 @@
 7050         rujianbin-eureka-hystrix-dashboard
 7051-7052    rujianbin-eureka-hystrix-turbine
 7055         rujianbin-eureka-zuul-apigateway
+7056         rujianbin-eureka-configcenter-server
