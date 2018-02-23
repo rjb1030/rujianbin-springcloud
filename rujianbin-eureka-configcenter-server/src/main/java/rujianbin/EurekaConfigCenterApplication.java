@@ -3,6 +3,7 @@ package rujianbin;
 import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
@@ -32,6 +33,7 @@ import javax.security.auth.message.config.AuthConfigFactory;
  # 4. 加解密URL  http://127.0.0.1:7056/encrypt  http://127.0.0.1:7056/decrypt  用post 参数data Content-Type=application/json
  *
  */
+@EnableDiscoveryClient
 @EnableConfigServer
 @SpringBootApplication
 @PropertySource(value={"classpath:application-configcenter.yml"},factory=YamlPropertySourceFactory.class)

@@ -11,7 +11,13 @@ spring:
         git:
           uri: https://gitee.com/rujianbin/spring-cloud-configcenter-file/    #路径到工程名
           search-paths: '{application}'        #git工程下的搜索路径，多个以逗号分隔,{application}表示用客户端的spring.application.name占位
-          username: '{cipher}de9d50bf0658d71d06159327e25fd581f3099c226a8fe67c7ae5a42a29919a43f9f2286215fae19dd69ef603e29c6081'
-          password: '{cipher}7aac20766405a84be5db7dc9ec8639ff13a54be3a6c94a7edce448e5ea39f118'
-          basedir: D:\devDirectory\workspace\sp_idea_demo\rujianbin-springcloud\rujianbin-eureka-configcenter-server\config-repo     #配置文件从git上clone后的缓存地址
+          username: 769524791@qq.com
+          password: 881030ru
+          force-pull: true
+          basedir: rujianbin-springcloud/${spring.application.name}/config-repo    #配置文件从git上clone后的缓存地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7040/eureka/     #将配置中心作为服务注册到eureka，实现高可用
+
 
