@@ -30,3 +30,6 @@ http://localhost:7042/sing   参数带对象，使用post请求
 
 #配置中心，访问配置
 http://127.0.0.1:7056/master/rujianbin-eureka-provider-dev.yml
+http://127.0.0.1:7056/encrypt/status      配置中心加密功能状态
+http://127.0.0.1:7056/encrypt   可以加密字符串 用post 参数data Content-Type=application/json
+http://127.0.0.1:7056/decrypt  可以解密字符串 用post

@@ -11,7 +11,25 @@ import rujianbin.common.utils.YamlPropertySourceFactory;
 import javax.security.auth.message.config.AuthConfigFactory;
 
 /**
- * Hello world!
+ * # 配置中心访问路径 http://127.0.0.1:7056/master/rujianbin-eureka-provider-dev.yml
+ #/{aplication}-{profile}.yml
+ #/{aplication}/{profile}[/{branch}]
+ #/{branch}/{application}-{profile}.yml
+ #/{application}-{profile}.properties
+ #/{branch}/{application}-{profile}.properties
+
+
+
+ # 本地文件系统,默认从configServer的resources目录下读取
+ # spring.profiles.active=native      启用本地文件系统
+ # spring.cloud.config.server.native.searchLocations   具体制定配置文件搜索位置，默认resoucrces
+
+
+ # 配置加密
+ # 1. 将local_policy.jar和US_export_policy.jar复制到$JAVA_HOME/jdk/jre/lib/security目录下，覆盖原来内容
+ # 2. 配置encrypt.key  此时访问http://127.0.0.1:7056/encrypt/status 显示{"status":"OK"}
+ # 3. 配置上带有{cipher}即会被解密处理
+ # 4. 加解密URL  http://127.0.0.1:7056/encrypt  http://127.0.0.1:7056/decrypt  用post 参数data Content-Type=application/json
  *
  */
 @EnableConfigServer
