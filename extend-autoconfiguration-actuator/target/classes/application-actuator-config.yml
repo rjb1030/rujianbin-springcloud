@@ -21,3 +21,6 @@ endpoints:
     enabled: true
   trace:
     enabled: true
+management:
+  security:
+    enabled: false

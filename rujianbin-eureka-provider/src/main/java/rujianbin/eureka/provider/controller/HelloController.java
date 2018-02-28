@@ -40,7 +40,7 @@ public class HelloController implements IHelloService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "hello! i am provider";
+        return "hello! i am provider "+sleepTime;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class HelloController implements IHelloService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "hello "+name+"("+age+")! i am provider";
+        return "hello "+name+"("+age+")! i am provider "+sleepTime;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class HelloController implements IHelloService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "hello,"+param.getSearchName()+","+param.getSearchPageNo()+","+ ArrayUtils.toString(param.getProductId().toArray());
+        return "hello,"+param.getSearchName()+","+param.getSearchPageNo()+","+ ArrayUtils.toString(param.getProductId().toArray())+" "+sleepTime;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class HelloController implements IHelloService {
             e.printStackTrace();
         }
         UserDto dto = new UserDto();
-        dto.setName(param.getSearchName());
+        dto.setName(param.getSearchName()+" "+sleepTime);
         dto.setAge(param.getSearchPageNo());
         dto.setAmount(new BigDecimal(param.getProductId().size()));
         return dto;

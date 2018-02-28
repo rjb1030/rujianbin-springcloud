@@ -2,6 +2,8 @@ package rujianbin.eureka.consumer.controller;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,9 +20,12 @@ import java.util.Map;
  * Created by rujianbin on 2018/2/6.
  */
 
+@RefreshScope  //该注解允许配置中心参数更新后调用/refresh后热更新变量
 @RestController
 public class HelloConsumerController {
 
+    @Value("${rujianbin.testName}")
+    private String testName;
 
     @Autowired
     private ITempHelloService tempHelloService;
@@ -63,6 +68,7 @@ public class HelloConsumerController {
         map.put("say",say);
         map.put("talk",talk);
         map.put("sing",sing);
+        map.put("testName",testName);
         Long s2 = System.currentTimeMillis();
         map.put("耗时",s2-s1);
         System.out.println(RjbStringUtils.ObjectToString(map));

@@ -18,6 +18,8 @@ logging:
       eureka:
         consumer:
           service: INFO
+rujianbin:
+  testName: sdfsdg45
 
 
     

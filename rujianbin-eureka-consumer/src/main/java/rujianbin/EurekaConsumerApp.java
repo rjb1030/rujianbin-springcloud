@@ -19,6 +19,21 @@ import javax.security.auth.message.config.AuthConfigFactory;
 /**
  * Hello world!
  * http://127.0.0.1:7046/hello-consumer
+ *
+ * 使用配置中心（优先于本地配置）：
+ * 确定配置中心服务以启动
+ * pom引入spring-cloud-starter-config
+ * 并且配置bootstrap.properties, 内容为http://127.0.0.1:7056/master/rujianbin-eureka-provider-dev.yml的拆解
+ *  spring.application.name=rujianbin-eureka-consumer     #$(aplication) 应用名也是文件名
+    spring.cloud.config.uri=http://127.0.0.1:7056         #配置中心地址或配置注册中心地址
+    spring.cloud.config.profile=dev                       #配置文件profile
+    spring.cloud.config.label=master                      #配置文件在git上的分支
+ *
+ *
+ * 配置中心热更新变量
+ * @RefreshScope 注解需要被热更新变量的java类
+ * actuator端点/refresh 用post请求下，配置变量即会生效
+ *
  */
 @EnableCircuitBreaker
 @EnableFeignClients
