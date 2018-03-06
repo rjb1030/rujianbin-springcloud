@@ -1,5 +1,5 @@
 server:
-  port: 7044
+  port: 7042
 eureka:
   client:
     service-url:
@@ -12,6 +12,8 @@ eureka:
 spring:
   application:
     name: rujianbin-eureka-provider
+rujianbin:
+  testName: local-dsf234234
 
 
 

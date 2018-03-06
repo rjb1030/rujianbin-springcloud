@@ -20,7 +20,7 @@ logging:
         consumer:
           service: INFO
 rujianbin:
-  testName: sdfsdg45
+  testName: local-safwer2
 
 
     

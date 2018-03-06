@@ -78,5 +78,6 @@ public class EurekaConsumerApp
                 EurekaConsumerApp.class
         ,ActuatorApplication.class).web(true).run(args).getEnvironment();
         log.info(RjbStringUtils.startupLog(env));
+        log.info("\n\trujianbin.testName:{}",env.getProperty("rujianbin.testName"));
     }
 }
