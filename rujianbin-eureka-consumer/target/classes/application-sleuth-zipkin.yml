@@ -1,0 +1,6 @@
+spring:
+  zipkin:
+      base-url: http://127.0.0.1:7058    #链路数据上传zipkin服务的地址
+  sleuth:
+    sampler:
+      percentage: 1     #链路跟踪信息被采集到远程分析系统（zipkin）的百分比

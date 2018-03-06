@@ -35,4 +35,8 @@ http://127.0.0.1:7056/encrypt   可以加密字符串 用post 参数data Content
 http://127.0.0.1:7056/decrypt  可以解密字符串 用post
 
 #rabbitmq访问
-http://127.0.0.1:15672
+http://127.0.0.1:15672  guest/guest
+
+
+#zipkin管理页面访问
+http://127.0.0.1:7058

@@ -39,6 +39,7 @@
       <module>rujianbin-eureka-configcenter-server</module>
       <module>rujianbin-eureka-rabbitmq</module>
       <module>rujianbin-eureka-rabbitmq</module>
+      <module>rujianbin-eureka-sleuth-zipkin</module>
   </modules>
 
 

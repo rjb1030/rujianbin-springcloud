@@ -1,0 +1,7 @@
+##本配置文件没有在配置中心，故会从本地加载。  通过消息总线更新配置http://127.0.0.1:7046/bus/refresh
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

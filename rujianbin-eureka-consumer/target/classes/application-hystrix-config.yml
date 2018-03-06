@@ -13,7 +13,7 @@ hystrix:
         isolation:
           strategy: THREAD   #隔离策略 THREAD SEMAPHORE.
           thread:
-            timeoutInMilliseconds: 1500
+            timeoutInMilliseconds: 2000
             maxConcurrentRequests: 20
           semaphore:
             maxConcurrentRequests: 20  #信号量隔离策略的最大并发数，不适用线程池模式（线程池策略默认最大并发10）. 超过max时，请求直接被拒绝，进入fallback

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: rujianbin-eureka-sleuth-zipkin
+server:
+  port: 7058

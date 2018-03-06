@@ -6,5 +6,12 @@ spring:
     port: 5672
     username: guest
     password: guest
+  cloud:
+    stream:
+      bindings:
+        orderCreateInput:    #channelName
+          destination: orderCreateInputExchange   #exchaneName或者可以认为是发布－订阅模型里面的topic
+          group: mygroup1   #配置了group则，则多个实例启动时只有一个实例能真正收到消息消费。 不配置group则多个实例都会收到
 server:
   port: 7057
+

@@ -12,6 +12,7 @@ eureka:
 spring:
   application:
     name: rujianbin-eureka-consumer
+
 logging:
   level:
     rujianbin:

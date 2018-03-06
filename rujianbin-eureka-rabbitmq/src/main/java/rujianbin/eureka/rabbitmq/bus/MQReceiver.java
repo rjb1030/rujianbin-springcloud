@@ -1,4 +1,4 @@
-package rujianbin.eureka.rabbitmq;
+package rujianbin.eureka.rabbitmq.bus;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

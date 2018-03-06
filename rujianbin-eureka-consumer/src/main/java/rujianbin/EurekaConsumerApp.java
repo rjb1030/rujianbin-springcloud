@@ -2,6 +2,7 @@ package rujianbin;
 
 import feign.Logger;
 import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -11,7 +12,9 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
+import rujianbin.common.utils.RjbStringUtils;
 import rujianbin.common.utils.YamlPropertySourceFactory;
 
 import javax.security.auth.message.config.AuthConfigFactory;
@@ -32,30 +35,28 @@ import javax.security.auth.message.config.AuthConfigFactory;
  *
  * 配置中心热更新变量
  * @RefreshScope 注解需要被热更新变量的java类
- * actuator端点/refresh 用post请求下，配置变量即会生效
+ * actuator端点/refresh 用post请求下，配置变量即会生效，但只更新对应实例。
+ *
+ * 通过消息总线更新服务的所有实例：http://127.0.0.1:7046/bus/refresh
+ * 引入spring-cloud-starter-bus-amqp.jar
+ * 加载application-rabbitmq-amqp-config.yml 由于单独配置了classpath:xxxx而配置中心那个中心无该配置文件，故会从本地加载。
+ * 配置指向rabbitmq服务即可实现消息总线更新配置
+ * 继续优化方案是：spring-cloud-starter-bus-amqp.jar也同步整合到configserver。bus/refresh发送到configserver并通过destination指定需要更新的实例
  *
  */
-@EnableCircuitBreaker
+@EnableCircuitBreaker        //允许熔断断路
 @EnableFeignClients
-@EnableDiscoveryClient      //@EnableFeignClients和@EnableDiscoveryClient 貌似有冲突，导致启动不了
+@EnableDiscoveryClient
 @SpringBootApplication
-@PropertySource(value={"classpath:application-eureka-consumer-config.yml","classpath:application-hystrix-config.yml","classpath:application-ribbon-config.yml"},factory=YamlPropertySourceFactory.class)
+@PropertySource(value={"classpath:application-eureka-consumer-config.yml",
+        "classpath:application-hystrix-config.yml",
+        "classpath:application-ribbon-config.yml",
+        "classpath:application-rabbitmq-amqp-config.yml",
+        "classpath:application-sleuth-zipkin.yml"},factory=YamlPropertySourceFactory.class)
 public class EurekaConsumerApp
 {
 
-    /**
-     * feign请求的日志输出，同时需要配置文件制定@FeignClient制定的客户端类为DEBUG
-     * 默认是Logger.Level.NONE 不记录任何日志，故需要调整级别
-     * NONE: 不记录日志
-     * BASIC：仅记录请求方法，URL以及响应状态码和执行时间
-     * HEADERS: 记录除了BASIC的信息之外还会加上HEADER
-     * FULL 全部信息
-     * @return
-     */
-    @Bean
-    Logger.Level feignLoggerLevel(){
-        return Logger.Level.FULL;
-    }
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(EurekaConsumerApp.class);
 
     /**
      * 针对非feign模式请求 bibbon负载需要使用@LoadBalanced注解，对restTemplate请求拦截
@@ -73,8 +74,9 @@ public class EurekaConsumerApp
         if (AuthConfigFactory.getFactory() == null) {
             AuthConfigFactory.setFactory(new AuthConfigFactoryImpl());
         }
-        ApplicationContext ctx = new SpringApplicationBuilder().sources(
+        Environment env  = new SpringApplicationBuilder().sources(
                 EurekaConsumerApp.class
-        ,ActuatorApplication.class).web(true).run(args);
+        ,ActuatorApplication.class).web(true).run(args).getEnvironment();
+        log.info(RjbStringUtils.startupLog(env));
     }
 }

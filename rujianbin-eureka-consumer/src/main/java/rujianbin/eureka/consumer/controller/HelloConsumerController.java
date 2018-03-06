@@ -52,6 +52,7 @@ public class HelloConsumerController {
 
     @RequestMapping("/hello-consumer2")
     public Map hello2(){
+        System.out.println(Thread.currentThread().getId());
         Long s1 = System.currentTimeMillis();
         String hello = helloService.hello();
         String say = helloService.say("张三",12);

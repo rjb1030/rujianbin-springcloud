@@ -4,6 +4,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import rujianbin.common.utils.RjbStringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class RjbZuulFilter extends ZuulFilter {
          * post 在routing和error过滤器之后被调用（此时已取得服务实例的返回信息）
          * error 处理请求发送错误时被调用（最终流向还是post阶段，因为需要post过滤器将请求返回）
          */
-        return "pre";
+        return FilterConstants.PRE_TYPE;
     }
 
     @Override

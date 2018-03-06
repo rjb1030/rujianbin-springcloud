@@ -12,3 +12,4 @@
 7055         rujianbin-eureka-zuul-apigateway
 7056         rujianbin-eureka-configcenter-server
 7057         rujianbin-eureka-rabbitmq
+7058         rujianbin-eureka-sleuth-zipkin

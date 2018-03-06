@@ -35,5 +35,26 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
+
+        <!-- 服务链路跟踪  无需配置-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <!-- 将链路跟踪信息，传到zipkin服务 徐配置zipkin-server的url-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+
+        <!-- 多版本访问控制 （灰度基础）-->
+        <!--<dependency>-->
+            <!--<groupId>com.fm</groupId>-->
+            <!--<artifactId>fm-cloud-starter-bamboo</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.fm</groupId>-->
+            <!--<artifactId>fm-cloud-starter-graybunny-server</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 </project>
