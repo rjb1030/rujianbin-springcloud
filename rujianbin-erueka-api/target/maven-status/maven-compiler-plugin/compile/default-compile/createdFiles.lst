@@ -1,0 +1,4 @@
+rujianbin\App.class
+rujianbin\eureka\api\bean\UserDto.class
+rujianbin\eureka\api\bean\RjbParam.class
+rujianbin\eureka\api\service\IHelloService.class

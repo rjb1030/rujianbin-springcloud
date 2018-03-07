@@ -2,6 +2,7 @@ package rujianbin.eureka.consumer.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import rujianbin.eureka.api.bean.RjbParam;
 import rujianbin.eureka.api.bean.UserDto;
@@ -13,7 +14,12 @@ import rujianbin.eureka.api.bean.UserDto;
 public class ConsumerHelloFallback implements IConsumerHelloService {
 
     @Override
-    public String hello() {
+    public String header(@RequestHeader(value = "version", required = false) String version) {
+        return "error header";
+    }
+
+    @Override
+    public String hello(@RequestHeader(value = "version", required = false) String version) {
         return "error hello";
     }
 

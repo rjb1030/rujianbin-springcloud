@@ -54,7 +54,7 @@ public class HelloConsumerController {
     public Map hello2(){
         System.out.println(Thread.currentThread().getId());
         Long s1 = System.currentTimeMillis();
-        String hello = helloService.hello();
+        String hello = helloService.hello(null);
         String say = helloService.say("张三",12);
         RjbParam param = new RjbParam();
         param.setSearchName("王五");

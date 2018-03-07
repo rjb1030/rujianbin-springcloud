@@ -52,7 +52,7 @@ public class FeignConfig {
 
         @Override
         public void apply(RequestTemplate template) {
-            System.out.println(Thread.currentThread().getId());
+            System.out.println("线程id="+Thread.currentThread().getId());
             String name = (String)RjbThreadLocal.threadLocal.get();
             template.header("RequestInterceptor  XXX-PP", name);
         }

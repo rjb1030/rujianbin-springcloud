@@ -15,11 +15,11 @@ import rujianbin.eureka.api.service.IHelloService;
  * 利用@FeignClient 以接口形式封装服务提供者的restFul调用
  */
 
-@FeignClient(value = "rujianbin-eureka-provider",fallback = ConsumerHelloFallback.class)
+@FeignClient(value = "rujianbin-eureka-provider",fallbackFactory = IHelloServiceFallBackFactory.class)
 public interface IConsumerHelloService extends IHelloService {
 
     @RequestMapping("/hello")
-    String hello();
+    String hello(@RequestParam(value = "version", required = false) String version);
 
     @RequestMapping("/say")
     String say(@RequestParam("name") String name, @RequestParam("age") int age);

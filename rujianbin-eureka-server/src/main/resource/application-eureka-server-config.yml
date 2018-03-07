@@ -4,15 +4,15 @@ eureka:
   instance:
     appname: sid1-rujianbin-eureka-server
     hostname: localhost
-    prefer-ip-address: true
+    prefer-ip-address: true    #允许使用ip作为注册中心的地址。默认false即使用主机名（instance.hostname）且需要调用方将hostname做host指向
     lease-expiration-duration-in-seconds: 20
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:7040/eureka/
+      defaultZone: http://localhost:${server.port}/eureka/
   server:
-    enable-self-preservation: true
+    enable-self-preservation: true     #自我保护模式。所谓自我保护模式是指，出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除
 
 
 

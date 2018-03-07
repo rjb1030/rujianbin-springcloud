@@ -31,7 +31,7 @@ public class RjbWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
             String name = httpServletRequest.getHeader("XXX-PP");
             System.out.println("controller请求中 header[XXX-PP]="+name);
             RjbThreadLocal.threadLocal.set(name);
-            System.out.println(Thread.currentThread().getId());
+            System.out.println("线程id="+Thread.currentThread().getId());
             return true;
         }
     }

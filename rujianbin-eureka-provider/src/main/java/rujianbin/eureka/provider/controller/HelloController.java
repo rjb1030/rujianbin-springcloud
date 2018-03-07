@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rujianbin.eureka.api.bean.RjbParam;
 import rujianbin.eureka.api.bean.UserDto;
 import rujianbin.eureka.api.service.IHelloService;
@@ -30,7 +27,12 @@ public class HelloController implements IHelloService {
     private DiscoveryClient client;
 
     @Override
-    public String hello(){
+    public String header(@RequestHeader(value = "version", required = false) String version) {
+        return "header is version="+version;
+    }
+
+    @Override
+    public String hello(@RequestParam(value = "version", required = false) String version){
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("/hello host:{}.service_id:{}",instance.getHost(),instance.getServiceId());
         int sleepTime = new Random().nextInt(3000);

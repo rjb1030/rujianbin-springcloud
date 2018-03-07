@@ -5,6 +5,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:7040/eureka/
     register-with-eureka: true
+    fetch-registry: true
   instance:
     prefer-ip-address: true
     appname: eureka-provider:${random.int(100)}
