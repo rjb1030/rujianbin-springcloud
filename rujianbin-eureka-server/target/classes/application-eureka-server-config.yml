@@ -12,7 +12,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:${server.port}/eureka/
   server:
-    enable-self-preservation: false     #自我保护模式。所谓自我保护模式是指，出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除
+    enable-self-preservation: true     #自我保护模式。所谓自我保护模式是指，出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除
 
 
 
