@@ -15,6 +15,7 @@ import org.springframework.session.data.redis.RedisFlushMode;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
+import org.springframework.session.web.http.HttpSessionStrategy;
 import rujianbin.security.principal.author.RjbSecurityUser;
 
 import java.text.SimpleDateFormat;
@@ -53,6 +54,11 @@ public class SessionConfig {
         //存储路径
         defaultCookieSerializer.setCookiePath("/");
         return defaultCookieSerializer;
+    }
+
+    @Bean
+    public HttpSessionStrategy myHttpSessionStrategy(){
+        return new MyHttpSessionStrategy();
     }
 
     @Bean
