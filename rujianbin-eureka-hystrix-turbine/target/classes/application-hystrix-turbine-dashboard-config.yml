@@ -6,7 +6,7 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:7040/eureka/    #集群所在的注册中心
 turbine:
-  app-config: eureka-consumer    #instance-name
+  app-config: eureka-consumer    #spring-application-name  监控多个以逗号分隔
   cluster-name-expression: new String('default')   #指定集群名称
   combine-host-port: true   #以主机名和端口组合来区分服务
 server:

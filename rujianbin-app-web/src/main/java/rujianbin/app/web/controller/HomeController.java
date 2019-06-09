@@ -1,9 +1,8 @@
 package rujianbin.app.web.controller;
 
 
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.commons.collections.map.LinkedMap;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -45,8 +44,28 @@ public class HomeController {
     @RequestMapping("/hello")
     @ResponseBody
     public String login(HttpServletRequest request, HttpServletResponse response) {
-        return "hello world! you are authorization";
+        Authentication user = SecurityContextHolder.getContext().getAuthentication();
+        return "hello world! you are authorization,your token = "+request.getSession().getId();
     }
+
+    @RequestMapping("/currentUser")
+    @ResponseBody
+    public RjbSecurityUser currentUser(){
+        Authentication user = SecurityContextHolder.getContext().getAuthentication();
+        return (RjbSecurityUser)user.getPrincipal();
+    }
+
+    @RequestMapping("/token")
+    @ResponseBody
+    public Map<String,String> token(HttpServletRequest request, HttpServletResponse response) {
+        Map<String,String> map = new HashMap<>();
+        map.put("success","true");
+        map.put("message","");
+        map.put("data",request.getSession().getId());
+        return map;
+    }
+
+
 
 
     @RequestMapping("/chat-room")
@@ -144,6 +163,8 @@ public class HomeController {
             return "计算错误";
         }
     }
+
+
 
 
 }

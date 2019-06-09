@@ -18,6 +18,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7040/eureka/     #将配置中心作为服务注册到eureka，实现高可用
+      defaultZone: http://localhost:7040/eureka/   #将配置中心作为服务注册到eureka，实现高可用
 
 

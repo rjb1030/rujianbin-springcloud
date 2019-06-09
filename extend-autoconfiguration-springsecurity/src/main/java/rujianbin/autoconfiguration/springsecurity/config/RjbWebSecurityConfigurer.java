@@ -69,7 +69,7 @@ public class RjbWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         /**
          * 是否允许iframe嵌入 DENY,SAMEORIGIN,ALLOW-FROM;   此处允许同域名的iframe嵌入
          */
-        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().disable();
 
         /**
          * 放行请求
@@ -79,7 +79,7 @@ public class RjbWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         /**
          * 拦截请求
          */
-        if(CollectionUtils.isEmpty(authorizeMatchProperties.getAuthorityUrl())){
+        if(!CollectionUtils.isEmpty(authorizeMatchProperties.getAuthorityUrl())){
             for(Map.Entry<String,Object> url : authorizeMatchProperties.getAuthorityUrl().entrySet()){
                 http.authorizeRequests().antMatchers(url.getKey()).hasAuthority(url.getValue().toString());
             }
@@ -94,16 +94,27 @@ public class RjbWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         AccessDeniedHandlerImpl accessDeniedHandler = new AccessDeniedHandlerImpl();
         accessDeniedHandler.setErrorPage(accessDeniedUrl);
         http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-        http.formLogin().loginPage(loginHandleProperties.getLoginPage()+"?noAuth");
+
+        /**
+         * 未授权则跳转登录页
+         */
+        LoginUrlAuthenticationEntryPoint point = new LoginUrlAuthenticationEntryPoint("/login/login-noAuth");
+        point.setUseForward(true);
+        http.exceptionHandling().authenticationEntryPoint(point);
+//        http.formLogin().loginPage(loginHandleProperties.getLoginPage()+"?noAuth");
+//        http.formLogin().loginPage("http://localhost:3000/rujianbin-app-web/login/login-noAuth");
+
 
 
         /**
          * 登录策略（LoginFilter）
          * 如果要控制并发登录数 session策略需要自定义（SessionAuthenticationStrategy）
          */
-        RjbLoginSuccessHandler loginSuccessHandle = new RjbLoginSuccessHandler(loginHandleProperties.getSuccessUrl());
-        RjbLoginFailureHandler loginFailureHandler = new RjbLoginFailureHandler(loginHandleProperties.getFailureUrl());
-        RjbLoginFilter loginFilter = new RjbLoginFilter(loginHandleProperties.getLoginProcessingUrl(),loginSuccessHandle,loginFailureHandler,this.authenticationManager(),new RjbAuthenticationDetailsSource());
+//        RjbLoginSuccessHandler loginSuccessHandle = new RjbLoginSuccessHandler(loginHandleProperties.getSuccessUrl());
+//        RjbLoginFailureHandler loginFailureHandler = new RjbLoginFailureHandler(loginHandleProperties.getFailureUrl());
+        RjbLoginForwardAuthenticationSuccessHandler forwardSuccessHandle = new RjbLoginForwardAuthenticationSuccessHandler("/home/token");
+        RjbLoginForwardAuthenticationFailedHandler loginFailureHandler = new RjbLoginForwardAuthenticationFailedHandler("/login/login-error");
+        RjbLoginFilter loginFilter = new RjbLoginFilter(loginHandleProperties.getLoginProcessingUrl(),forwardSuccessHandle,loginFailureHandler,this.authenticationManager(),new RjbAuthenticationDetailsSource());
         //session策略，只能登陆一个。控制session互踢
         SessionRegistry sessionRegistry = new SessionRegistryImpl();
         loginFilter.setSessionAuthenticationStrategy(compositeSessionAuthenticationStrategy(sessionRegistry));
@@ -133,8 +144,8 @@ public class RjbWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
          * http.addFilterAt(new ConcurrentSessionFilter(sessionRegistry,loginHandleProperties.getLoginPage()+"?session-expired"),ConcurrentSessionFilter.class);
          */
         http.sessionManagement().sessionAuthenticationErrorUrl(loginHandleProperties.getLoginPage()+"?session-auth-error").invalidSessionUrl(loginHandleProperties.getLoginPage()+"?invalid-session")
-                .maximumSessions(1).maxSessionsPreventsLogin(true)   //此处2个配置无效，由loginFilter里的session策略配置
-                .expiredUrl(loginHandleProperties.getLoginPage()+"?session-expired")
+                .maximumSessions(1).maxSessionsPreventsLogin(false)   //此处2个配置无效，由loginFilter里的session策略配置,达到最大登录后禁止其他登录则maxSessionsPreventsLogin=true
+                .expiredUrl(loginHandleProperties.getLoginPage()+"?session-expired")   //被踢以后会定向到expiredUrl
                 .sessionRegistry(sessionRegistry);
 
     }

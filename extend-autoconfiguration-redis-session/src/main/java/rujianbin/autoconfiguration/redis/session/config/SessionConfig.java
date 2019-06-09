@@ -47,7 +47,7 @@ public class SessionConfig {
 
 
     @Bean
-    public CookieSerializer cookieSerializer() {
+    public CookieSerializer rjbCookieSerializer() {
         DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
         //cookie名字
         defaultCookieSerializer.setCookieName("rjbSessionId");

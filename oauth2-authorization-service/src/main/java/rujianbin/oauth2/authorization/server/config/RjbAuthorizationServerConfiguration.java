@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -15,12 +16,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.CompositeTokenGranter;
+import org.springframework.security.oauth2.provider.TokenGranter;
 import org.springframework.security.oauth2.provider.approval.DefaultUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenGranter;
 import org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
@@ -29,6 +35,8 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rujianbin on 2017/12/26.
@@ -75,6 +83,26 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
                 .pathMapping("/oauth/check_token",endpointUrlProperties.getCheckTokenUrl())
                 .pathMapping("/oauth/token_key",endpointUrlProperties.getTokenKeyUrl())
                 .authenticationManager(this.authenticationManager);
+
+
+        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+
+        List<TokenGranter> tokenGranters = new ArrayList<TokenGranter>();
+        //authorization_code授权码模式
+        tokenGranters.add(new AuthorizationCodeTokenGranter(endpoints.getTokenServices(), endpoints.getAuthorizationCodeServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory()));
+
+
+        //client_credentials客户端模式
+        tokenGranters.add(new ClientCredentialsTokenGranter(endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory()));
+
+        //密码模式
+        //tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory()));
+
+
+        //refresh_token 刷新token专用
+        tokenGranters.add(new RefreshTokenGranter(endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory()));
+
+        endpoints.tokenGranter(new CompositeTokenGranter(tokenGranters));
     }
 
 
@@ -90,52 +118,6 @@ public class RjbAuthorizationServerConfiguration extends AuthorizationServerConf
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        // @formatter:off
-//        clients.inMemory().withClient("tonr")
-//                .resourceIds(SPARKLR_RESOURCE_ID)
-//                .authorizedGrantTypes("authorization_code", "implicit")
-//                .authorities("ROLE_CLIENT")
-//                .scopes("read", "write")
-//                .secret("secret")
-//                .and()
-//                .withClient("tonr-with-redirect")
-//                .resourceIds(SPARKLR_RESOURCE_ID)
-//                .authorizedGrantTypes("authorization_code", "implicit")
-//                .authorities("ROLE_CLIENT")
-//                .scopes("read", "write")
-//                .secret("secret")
-//                .redirectUris(tonrRedirectUri)
-//                .and()
-//                .withClient("my-client-with-registered-redirect")
-//                .resourceIds(SPARKLR_RESOURCE_ID)
-//                .authorizedGrantTypes("authorization_code", "client_credentials")
-//                .authorities("ROLE_CLIENT")
-//                .scopes("read", "trust")
-//                .redirectUris("http://anywhere?key=value")
-//                .and()
-//                .withClient("my-trusted-client")
-//                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-//                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-//                .scopes("read", "write", "trust")
-//                .accessTokenValiditySeconds(60)
-//                .and()
-//                .withClient("my-trusted-client-with-secret")
-//                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-//                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-//                .scopes("read", "write", "trust")
-//                .secret("somesecret")
-//                .and()
-//                .withClient("my-less-trusted-client")
-//                .authorizedGrantTypes("authorization_code", "implicit")
-//                .authorities("ROLE_CLIENT")
-//                .scopes("read", "write", "trust")
-//                .and()
-//                .withClient("my-less-trusted-autoapprove-client")
-//                .authorizedGrantTypes("implicit")
-//                .authorities("ROLE_CLIENT")
-//                .scopes("read", "write", "trust")
-//                .autoApprove(true);
-
         clients.withClientDetails(jdbcClientDetailsService);
     }
 

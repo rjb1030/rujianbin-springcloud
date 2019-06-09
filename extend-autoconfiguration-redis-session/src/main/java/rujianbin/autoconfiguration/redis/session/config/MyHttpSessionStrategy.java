@@ -4,6 +4,7 @@ import org.springframework.session.Session;
 import org.springframework.session.web.http.*;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
@@ -24,7 +25,8 @@ public class MyHttpSessionStrategy implements MultiHttpSessionStrategy, HttpSess
     static final String DEFAULT_SESSION_ALIAS_PARAM_NAME = "_s";
     private static final Pattern ALIAS_PATTERN = Pattern.compile("^[\\w-]{1,50}$");
     private String sessionParam = "_s";
-    private CookieSerializer cookieSerializer = new DefaultCookieSerializer();
+    @Resource(name="rjbCookieSerializer")
+    private CookieSerializer cookieSerializer;
     private String deserializationDelimiter = " ";
     private String serializationDelimiter = " ";
 

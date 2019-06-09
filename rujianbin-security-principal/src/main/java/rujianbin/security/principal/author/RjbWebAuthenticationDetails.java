@@ -17,10 +17,10 @@ public class RjbWebAuthenticationDetails extends WebAuthenticationDetails {
 
     public RjbWebAuthenticationDetails(HttpServletRequest request){
         super(request);
-        Captcha = request.getParameter("vCode");
-        if(Captcha==null || !Captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
-            throw new KaptchaException("Captcha code error");
-        }
+//        Captcha = request.getParameter("vCode");
+//        if(Captcha==null || !Captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
+//            throw new KaptchaException("Captcha code error");
+//        }
     }
 
     public String getCaptcha() {

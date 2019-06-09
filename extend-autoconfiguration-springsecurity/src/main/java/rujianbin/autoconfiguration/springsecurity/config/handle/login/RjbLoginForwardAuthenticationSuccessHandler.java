@@ -2,26 +2,22 @@ package rujianbin.autoconfiguration.springsecurity.config.handle.login;
 
 import com.google.code.kaptcha.Constants;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.authentication.ForwardAuthenticationSuccessHandler;
 import rujianbin.security.principal.author.RjbSecurityUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Created by rujianbin on 2017/12/15.
- * 直接跳转指定URL的页面
+ * Created by xyl.
+ * forwd跳转
  */
-public class RjbLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class RjbLoginForwardAuthenticationSuccessHandler extends ForwardAuthenticationSuccessHandler {
 
-    public RjbLoginSuccessHandler(String defaultTargetUrl){
-        super.setDefaultTargetUrl(defaultTargetUrl);
+    public RjbLoginForwardAuthenticationSuccessHandler(String forwardUrl){
+        super(forwardUrl);
     }
 
     @Override
