@@ -45,7 +45,7 @@
     <commons-fileupload.version>1.2.2</commons-fileupload.version>
     <lucene.version>5.4.1</lucene.version>
     <zookeeper.version>3.4.9</zookeeper.version>
-    <quartz.version>1.8.6</quartz.version>
+    <quartz.version>2.3.2</quartz.version>
     <memcached.version>2.5.1</memcached.version>
     <IKAnalyzer.version>3.2.8</IKAnalyzer.version>
     <poi.version>3.16</poi.version>
