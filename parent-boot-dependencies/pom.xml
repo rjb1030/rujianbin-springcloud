@@ -48,7 +48,7 @@
     <quartz.version>1.8.6</quartz.version>
     <memcached.version>2.5.1</memcached.version>
     <IKAnalyzer.version>3.2.8</IKAnalyzer.version>
-    <poi.version>3.16</poi.version>
+    <poi.version>4.1.1</poi.version>
     <dozer.version>5.4.0</dozer.version>
     <jsoup.version>1.7.2</jsoup.version>
     <compress-filter.version>1.7</compress-filter.version>
