@@ -50,7 +50,7 @@
     <IKAnalyzer.version>3.2.8</IKAnalyzer.version>
     <poi.version>3.16</poi.version>
     <dozer.version>5.4.0</dozer.version>
-    <jsoup.version>1.7.2</jsoup.version>
+    <jsoup.version>1.15.3</jsoup.version>
     <compress-filter.version>1.7</compress-filter.version>
     <bcprov-jdk15on.version>1.57</bcprov-jdk15on.version>
     <c3p0.version>0.9.1.2</c3p0.version>
